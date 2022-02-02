@@ -11,7 +11,7 @@
                 <li class="li_header"><a href="#">Shopping</a></li>
                 <li class="li_header"><a href="#">Product</a></li>
                 <li class="li_header"><a href="#">Contact us</a></li>
-            </ul>    
+            </ul>
         </div>
         <div class="search">
             <input class="header_search" type="text" name="search" placeholder="Search here"><input class="header_submit" type="submit" name="submit" value="Search">
