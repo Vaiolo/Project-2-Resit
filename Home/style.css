@@ -254,3 +254,48 @@ textarea{
     color: black;
     font-family: arial, sans-serif;
   }
+
+/*...................................................Register page/form.................................................. */
+
+.description {
+  grid-row: 3;
+  grid-column: 1;
+  margin-left: 54vh;
+  margin-top: 10vh;
+  color: #005aa7;
+}
+
+#registration {
+	display: inline-grid;
+	grid-column: 1/3;
+	grid-row: 3/5;
+}
+
+.registration_box {
+	display: inline;
+	width:500px;
+	height:333px;
+	margin:25px;
+}
+
+#registeraccount{
+	width: 100px;
+	color: white;
+	font-family: Segoe UI;
+	background-color: #005aa7;
+}
+
+
+.registration_box form{
+	margin-left: 50vh;
+  margin-top: 20vh;
+
+}
+
+.registration_box input{
+	width: 300px;
+	height: 30px;
+	margin-bottom: 10px;
+	margin-top: 15px;
+	border: 1px solid;
+}
