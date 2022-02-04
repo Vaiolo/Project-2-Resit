@@ -426,3 +426,100 @@ article.PearPhoneText input[type=submit]{
 }
 .Product4:hover {
     background-color: lightgray;
+}
+/******** Shopping cart *******/
+
+#containerCart{
+    margin: 0 auto;
+    width: 1024px;
+    height: 50vh;
+}
+#cartItem1{
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    background-color: #cccccc;
+    margin-top: 30px;
+
+}
+article.cartText{
+    margin-top: 10px;
+    margin-bottom: 50px ;
+}
+
+.productImage {
+    grid-column: 1/2;
+    grid-row: 1/2;
+    margin: auto;
+}
+.cartproductName {
+    grid-column: 2/3;
+    grid-row: 1/2;
+    margin: auto;
+}
+article.amount {
+    grid-column: 3/4;
+    grid-row: 1/2;
+    margin: auto;
+}
+article.amount p{
+    display: inline;
+    margin: auto;
+}
+.cartPrice {
+    grid-row: 1/2;
+    grid-column: 4/5;
+    margin: auto;
+}
+
+.productImage1 {
+    grid-column: 1/2;
+    grid-row: 2/3;
+    margin: auto;
+}
+.cartproductName1 {
+    grid-column: 2/3;
+    grid-row: 2/3;
+    margin: auto;
+}
+article.amount1 {
+    grid-column: 3/4;
+    grid-row: 2/3;
+    margin: auto;
+}
+article.amount1 p{
+    display: inline;
+    margin: auto;
+}
+.cartPrice1 {
+    grid-row: 2/3;
+    grid-column: 4/5;
+    margin: auto;
+}
+
+.buttonCart1 input[type=submit]{
+    border: none;
+    outline: none;
+    color: #fff;
+    background-color: #1a73e8;
+    padding: 0.625rem 3.25rem;
+    cursor: pointer;
+    font-size: 1rem;
+    float: right;
+    margin-right: 20px;
+
+}
+.buttonCart2 input[type=submit]{
+    border: none;
+    outline: none;
+    color: #fff;
+    background-color: red;
+    padding: 0.625rem 3.25rem;
+    cursor: pointer;
+    font-size: 1rem;
+    float: right;
+    margin-right: 30px;
+}
+
+
+
+
