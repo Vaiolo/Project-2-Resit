@@ -23,6 +23,12 @@ body{
 .header_logo{
     color: white;
 }
+.footer_about{
+    color: white;
+}
+.footer_contact{
+    color: white;
+}
 
 p{
     color: white;
