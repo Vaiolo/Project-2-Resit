@@ -360,3 +360,69 @@ textarea{
 .submit2:hover{
     cursor: pointer;
 }
+/*Product overview */
+#container{
+    margin: 0 auto;
+    width: 1024px;
+    background-color: white;
+}
+#pearphone{
+    display: grid;
+    grid-template-columns: 30% 70%;
+    margin-top: 20px;
+}
+article.pearPhonePhoto{
+    grid-column: 1/2;
+}
+article.PearPhoneText{
+    grid-column: 2/3;
+    text-align: left;
+    margin-left: 50px;
+    margin-top: auto;
+    margin-right: auto;
+    margin-bottom: auto;
+    color: black;
+}
+article.PearPhoneText input[type=submit]{
+    background-color: #156bb8;
+    color: white;
+
+
+}
+#PearProduct{
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    margin-top: 20px;
+    grid-gap: 20px;
+}
+.Product1{
+    grid-column: 1/2;
+    text-align: center;
+    background-color: #f5f5f5;
+}
+.Product1:hover{
+    background-color: lightgray;
+}
+.Product2{
+    grid-column: 2/3;
+    text-align: center;
+    background-color: #f5f5f5;
+}
+.Product2:hover {
+    background-color: lightgray;
+}
+.Product3{
+    grid-column: 3/4;
+    text-align: center;
+    background-color: #f5f5f5;
+}
+.Product3:hover {
+    background-color: lightgray;
+}
+.Product4{
+    grid-column: 4/5;
+    text-align: center;
+    background-color: #f5f5f5;
+}
+.Product4:hover {
+    background-color: lightgray;
