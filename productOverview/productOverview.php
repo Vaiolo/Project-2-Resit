@@ -9,7 +9,7 @@
 <?php
 include('../header and footer/header.php');
 ?>
-<div id="container">
+<div id="containerProduct">
     <div id="pearphone">
         <article class="pearPhonePhoto">
             <img src="../images/phone.png" alt="pearphone"/>
