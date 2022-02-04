@@ -3,7 +3,7 @@
             <img src="../images/logo.PNG" alt="logo">
         </div>
         <div class="center_footer">
-            <h3><u>About NHL WEBSHOP</u></h3>
+            <h3 class="footer_about"><u>About NHL WEBSHOP</u></h3>
             <ul>
                 <li><a href="#">Home</a></li>
                 <li><a href="#">Login</a></li>
@@ -12,7 +12,7 @@
             </ul>
         </div>
         <div class="right_footer">
-            <h3><u>Contact details</u></h3>
+            <h3 class="footer_contact"><u>Contact details</u></h3>
             <ul>
                 <li>NHL Stenden University of Applied Sciences</li>
                 <li>Rengerslaan 8-10, 8917 DD Leeuwarden
