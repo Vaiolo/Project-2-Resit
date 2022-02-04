@@ -299,3 +299,64 @@ textarea{
 	margin-top: 15px;
 	border: 1px solid;
 }
+/*...................................................Home.................................................. */
+.home_p{
+    color: black;
+}
+.home_img{
+    margin-left: -15vh;
+}
+.home_img2{
+    width: 40vh;
+    height: 40vh;
+    margin-left: -7vh;
+}
+.home_main{
+    margin: 3vh auto;
+    display: grid;
+    width: 109vh;
+    grid-template-columns: 36vh 36vh 36vh;
+    
+}
+.home_end{
+    align-self: center;
+    justify-self: center;
+    grid-column: 2/4;
+}
+.home_right{
+    color: #202124;
+}
+.home_right1{
+    color: #202124;
+}
+.submit1{
+    padding: 0.8vh 1vh;
+    background-color:#156bb8 ;
+    color: white;
+    border: none;
+    margin-left: 59vh ;
+}
+.submit1:hover{
+    cursor: pointer;
+}
+.home_main1{
+    margin: 3vh auto;
+    display: grid;
+    width: 109vh;
+    grid-template-columns: 36vh 36vh 36vh;
+}
+.home_end1{
+    grid-column: 1/3;
+    align-self: center;
+    justify-self: center;
+}
+.submit2{
+    margin-top: 2vh;
+    padding: 0.8vh 1vh;
+    background-color:#156bb8 ;
+    color: white;
+    border: none;
+}    
+.submit2:hover{
+    cursor: pointer;
+}
