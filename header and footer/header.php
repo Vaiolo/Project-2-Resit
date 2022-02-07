@@ -1,6 +1,6 @@
 <header>
         <div class="left_header">
-            <h3>NHL WEBSHOP</h3>
+            <h3 class="header_logo">NHL WEBSHOP</h3>
         </div>
         <div class="right_header">
             <ul>
