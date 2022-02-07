@@ -316,7 +316,7 @@ textarea{
     display: grid;
     width: 109vh;
     grid-template-columns: 36vh 36vh 36vh;
-    
+
 }
 .home_end{
     align-self: center;
@@ -356,7 +356,7 @@ textarea{
     background-color:#156bb8 ;
     color: white;
     border: none;
-}    
+}
 .submit2:hover{
     cursor: pointer;
 }
