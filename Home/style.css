@@ -14,7 +14,7 @@ body{
   display: grid;
   justify-content: center;
   grid-template-columns: 80vh 80vh;
-  grid-template-rows: 8vh 4vh 50vh 50vh 32vh;
+  grid-template-rows: 8vh 4vh 60vh 60vh 32vh;
 }
 
 
@@ -262,9 +262,10 @@ textarea{
   grid-row: 3;
   grid-column: 1;
   margin-left: 54vh;
-  margin-top: 10vh;
+  margin-top: 8vh;
   color: #005aa7;
 }
+
 
 #registration {
 	display: inline-grid;
@@ -289,7 +290,7 @@ textarea{
 
 .registration_box form{
 	margin-left: 50vh;
-  margin-top: 20vh;
+  margin-top: 8vh;
 
 }
 

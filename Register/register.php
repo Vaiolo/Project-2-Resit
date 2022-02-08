@@ -17,21 +17,39 @@
 
     <div id="registration">
         <div class="registration_box">
-            <form method="post">
-                <label for="firstname">First name:</label><br>
-                <input type="text" name="firstname" /><br>
-                <label for="lastname">Last name:</label><br>
-                <input type="text" name="lastname" /><br>
-                <label for="email">Email:</label><br>
-                <input type="email" name="email" /><br>
-                <label for="birth">Date of birth:</label><br>
-                <input type="date" name="birth" /><br>
-                <label for="password">Password:</label><br>
-                <input type="password" name="password" /><br>
-                <input type="submit" name="submit" id="registeraccount" value="Register"/>
-            </form>
-        </div>
-    </div>
+          <form method="post">
+              <?php
+              include('registration.php');
+              ?> <br><br>
+
+              <label for="firstName">First Name:</label><br>
+              <input type="text" name="first_name" id="firstName"><br>
+
+              <label for="lastName">Last Name:</label><br>
+              <input type="text" name="last_name" id="lastName"><br>
+
+              <label for="Address">Address:</label><br>
+              <input type="text" name="address" id="Address"><br>
+
+               <label for="city">City:</label><br>
+              <input type="text" name="city" id="city"><br>
+
+               <label for="country">Country:</label><br>
+              <input type="text" name="country" id="country"><br>
+
+              <label for="birth">Date of birth:</label><br>
+              <input type="date" name="birth" /><br>
+
+              <label for="emailAddress">Email Address:</label><br>
+              <input type="text" name="email" id="emailAddress"><br>
+
+              <label for="password">Password:</label><br>
+              <input type="password" name="password" id="password"><br>
+
+          <input type="submit" value="Submit" id="registeraccount">
+      </form>
+  </div>
+</div>
 
     <?php
       include('../header and footer/footer.php');
