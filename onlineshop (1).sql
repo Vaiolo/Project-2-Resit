@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Feb 07, 2022 alle 20:57
+-- Creato il: Feb 08, 2022 alle 22:23
 -- Versione del server: 10.4.20-MariaDB
 -- Versione PHP: 8.0.9
 
@@ -144,7 +144,6 @@ CREATE TABLE `status` (
 --
 
 CREATE TABLE `user` (
-  `UserID` int(11) NOT NULL,
   `FirstName` varchar(255) DEFAULT NULL,
   `LastName` varchar(255) DEFAULT NULL,
   `Email` varchar(40) DEFAULT NULL,
@@ -153,7 +152,8 @@ CREATE TABLE `user` (
   `City` varchar(255) DEFAULT NULL,
   `Country` varchar(255) DEFAULT NULL,
   `AccountType` int(11) DEFAULT NULL,
-  `DateofBirth` date DEFAULT NULL
+  `DateofBirth` date DEFAULT NULL,
+  `UserID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -186,8 +186,8 @@ ALTER TABLE `image`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`OrderID`),
-  ADD KEY `fk_userID` (`UserID`),
-  ADD KEY `fk5_ProductID` (`ProductID`);
+  ADD KEY `fk5_ProductID` (`ProductID`),
+  ADD KEY `fk1_UserID` (`UserID`);
 
 --
 -- Indici per le tabelle `ordertrack`
@@ -215,8 +215,8 @@ ALTER TABLE `product`
 --
 ALTER TABLE `shoppingcart_row`
   ADD PRIMARY KEY (`CartID`),
-  ADD KEY `fk1_userID` (`UserID`),
-  ADD KEY `fk2_productID` (`ProductID`);
+  ADD KEY `fk2_productID` (`ProductID`),
+  ADD KEY `fk_UserID` (`UserID`);
 
 --
 -- Indici per le tabelle `status`
@@ -247,6 +247,12 @@ ALTER TABLE `image`
   MODIFY `ImageID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT per la tabella `user`
+--
+ALTER TABLE `user`
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+
+--
 -- Limiti per le tabelle scaricate
 --
 
@@ -272,8 +278,8 @@ ALTER TABLE `image`
 -- Limiti per la tabella `orders`
 --
 ALTER TABLE `orders`
-  ADD CONSTRAINT `fk5_ProductID` FOREIGN KEY (`ProductID`) REFERENCES `product` (`ProductID`),
-  ADD CONSTRAINT `fk_userID` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`);
+  ADD CONSTRAINT `fk1_UserID` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`),
+  ADD CONSTRAINT `fk5_ProductID` FOREIGN KEY (`ProductID`) REFERENCES `product` (`ProductID`);
 
 --
 -- Limiti per la tabella `ordertrack`
@@ -293,8 +299,8 @@ ALTER TABLE `order_row`
 -- Limiti per la tabella `shoppingcart_row`
 --
 ALTER TABLE `shoppingcart_row`
-  ADD CONSTRAINT `fk1_userID` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`),
-  ADD CONSTRAINT `fk2_productID` FOREIGN KEY (`ProductID`) REFERENCES `product` (`ProductID`);
+  ADD CONSTRAINT `fk2_productID` FOREIGN KEY (`ProductID`) REFERENCES `product` (`ProductID`),
+  ADD CONSTRAINT `fk_UserID` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
