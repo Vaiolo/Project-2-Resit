@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +11,14 @@
     <title>Document</title>
 </head>
 <body>
-<?php include '../header and footer/header.php';?>
+
+<?php
+if(isset($_SESSION['Email'])) {
+    include('../header and footer/headerLOGGEDIN.php');
+} else {
+    include('../header and footer/header.php');
+}?>
+
      <div class="home_main">
         <div>
             <img class="home_img" src="../images/pear-phone.png" alt="phone">

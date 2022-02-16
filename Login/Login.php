@@ -2,11 +2,6 @@
 // Initialize the session
 session_start();
 
-// Check if the user is already logged in, if yes then redirect him to welcome page
-if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-    header("location: ../Home/Home.php");
-    exit;
-}
 
 // Include config file
 require_once "../Register/conn.php";
@@ -56,7 +51,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     if(mysqli_stmt_fetch($stmt)){
                         if(password_verify($password, $hashed_password)){
                             // Password is correct, so start a new session
-                            session_start();
+                            //session_start();
 
                             // Store data in session variables
                             $_SESSION["loggedin"] = true;
@@ -86,6 +81,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     mysqli_close($conn);
 }
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -100,7 +97,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
   <div class="container_login">
   <?php
-          include('../header and footer/header.php');
+        include('../header and footer/header.php');
   ?>
 
   <?php

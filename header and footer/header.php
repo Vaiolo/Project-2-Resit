@@ -6,7 +6,7 @@
             <ul>
                 <li class="li_header"><a href="../Home/home.php">Home</a></li>
                 <li class="li_header"><a href="../Login/Login.php">Login</a></li>
-                <li class="li_header"><a href="../Register/register.php">Registration</a></li>
+                <li class="li_header"><a href="../Register/registration.php">Registration</a></li>
                 <li class="li_header"><a href="#">Orders</a></li>
                 <li class="li_header"><a href="#">Shopping</a></li>
                 <li class="li_header"><a href="#">Product</a></li>
