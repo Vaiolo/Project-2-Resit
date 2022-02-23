@@ -5,10 +5,9 @@
         <div class="right_header">
             <ul>
                 <li class="li_header"><a href="../Home/home.php">Home</a></li>
+                <li class="li_header"><a href="#">Shop</a></li>
                 <li class="li_header"><a href="../Login/logout.php">Logout</a></li>
                 <li class="li_header"><a href="#">Orders</a></li>
-                <li class="li_header"><a href="#">Shopping</a></li>
-                <li class="li_header"><a href="#">Product</a></li>
                 <li class="li_header"><a href="../Contact Us/Contact_us.php">Contact us</a></li>
             </ul>
         </div>

@@ -306,7 +306,7 @@ textarea{
     color: black;
 }
 .home_img{
-    margin-left: -15vh;
+    margin-left: -35vh;
 }
 .home_img2{
     width: 40vh;
@@ -351,6 +351,7 @@ textarea{
     grid-column: 1/3;
     align-self: center;
     justify-self: center;
+    margin-left: -15vh;
 }
 .submit2{
     margin-top: 2vh;
