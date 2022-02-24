@@ -1,29 +1,30 @@
 <?php
 
-// Username is root
-$user = 'root';
-$password = '';
+$conn = mysqli_connect("localhost","root","","company");
+// Check connection
+if (mysqli_connect_errno())
+  {
+  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+  }
 
-// Database name is gfg
-$database = 'company';
+$sql = "SELECT * FROM employee";
+$result = $conn->query($sql);
 
-// Server is localhost with
-// port number 3308
-$servername='localhost';
-$mysqli = new mysqli($servername, $user,
-                $password, $database);
+if(isset($_POST['submit'])){
+    $status=$_POST['status'];
+    $sql="UPDATE employee SET status='$status'";
+    if (!mysqli_query($conn,$sql)) {
+        echo "data not insert";
+    }
+    else
+    {
+        echo "data is insert";
+    }
 
-// Checking for connections
-if ($mysqli->connect_error) {
-    die('Connect Error (' .
-    $mysqli->connect_errno . ') '.
-    $mysqli->connect_error);
 }
 
-// SQL query to select data from database
-$sql = "SELECT * FROM employee";
-$result = $mysqli->query($sql);
 ?>
+
 <div class="col-md-12">
 <div class="row">
 <h1 class="page-header">
@@ -48,28 +49,27 @@ $result = $mysqli->query($sql);
           while($rows=$result->fetch_assoc())
           {
        ?>
-      <tr>
-          <td><?php echo $rows['employeeID'];?></td>
-          <td><?php echo $rows['employee_name'];?></td>
-          <td><?php echo $rows['employee_email'];?></td>
-          <td><?php echo $rows['employee_contact'];?></td>
-          <td>
-            <form action="index.php.php" method="post">
-            <select name="status">
-            <option value="0"></option>
-            <option value="1">Being Packed</option>
-            <option value="2">Being Sent</option>
-            <option value="3">Being Delivered</option>
-            </select>
-            </form>
-          </td>
-      </tr>
-      <?php
-           }
-       ?>
-       <div class="button">
-        <button type="submit" name="update">Update</button>
-       </div>
+       <tr>
+            <td><?php echo $rows['employeeID'];?></td>
+            <td><?php echo $rows['employee_name'];?></td>
+            <td><?php echo $rows['employee_email'];?></td>
+            <td><?php echo $rows['employee_contact'];?></td>
+            <td>
+              <form method="post">
+ 					        <select name="status">
+   					        <option>>---Select---<</option>
+   					        <option value="Packed"> Packed</option>
+   					        <option value="Shipped"> Shipped</option>
+   					        <opton value="Delivered"> Delivered</option>
+ 					        </select>
+ 					        <br><br>
+ 					        <input type="submit" name="submit" value="submit">
+ 					    </form>
+            </td>
+        </tr>
+             <?php
+                  }
+              ?>
   </tbody>
 </table>
 </div>
