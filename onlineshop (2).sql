@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Feb 08, 2022 alle 22:23
+-- Creato il: Feb 24, 2022 alle 15:37
 -- Versione del server: 10.4.20-MariaDB
 -- Versione PHP: 8.0.9
 
@@ -69,9 +69,16 @@ CREATE TABLE `image` (
 CREATE TABLE `orders` (
   `OrderID` int(11) NOT NULL,
   `UserID` int(11) DEFAULT NULL,
-  `ProductID` int(11) DEFAULT NULL,
   `Dateoftheorder` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dump dei dati per la tabella `orders`
+--
+
+INSERT INTO `orders` (`OrderID`, `UserID`, `Dateoftheorder`) VALUES
+(0, 83, '0000-00-00'),
+(1, 83, '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -157,6 +164,14 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- Dump dei dati per la tabella `user`
+--
+
+INSERT INTO `user` (`FirstName`, `LastName`, `Email`, `Password`, `Address`, `City`, `Country`, `AccountType`, `DateofBirth`, `UserID`) VALUES
+('Violetta', 'Fazzi', 'violettafazzi@gmail.com', '$2y$10$ZRyD7dx049CxFCi2MIMqt.oC8utzcMNAIYts/eAVbC6dVqdTCT.aa', 'Via Angelo Mangani', 'Viterbo', 'Italia', 0, '2002-05-07', 83),
+('Violetta', 'Fazzi', 'kimt070502@gmail.com', '$2y$10$i6al1tcSWi/bR4PQhpwuueO2etZh0AjYt7JyF/MovVKTulE7C3ea.', 'Via Angelo Mangani', 'Viterbo', 'Italia', 0, '2002-05-07', 84);
+
+--
 -- Indici per le tabelle scaricate
 --
 
@@ -186,7 +201,6 @@ ALTER TABLE `image`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`OrderID`),
-  ADD KEY `fk5_ProductID` (`ProductID`),
   ADD KEY `fk1_UserID` (`UserID`);
 
 --
@@ -250,7 +264,7 @@ ALTER TABLE `image`
 -- AUTO_INCREMENT per la tabella `user`
 --
 ALTER TABLE `user`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
 -- Limiti per le tabelle scaricate
@@ -278,8 +292,7 @@ ALTER TABLE `image`
 -- Limiti per la tabella `orders`
 --
 ALTER TABLE `orders`
-  ADD CONSTRAINT `fk1_UserID` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`),
-  ADD CONSTRAINT `fk5_ProductID` FOREIGN KEY (`ProductID`) REFERENCES `product` (`ProductID`);
+  ADD CONSTRAINT `fk1_UserID` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`);
 
 --
 -- Limiti per la tabella `ordertrack`
