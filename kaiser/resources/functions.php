@@ -56,7 +56,7 @@ function get_products(){
                                 <h4 class="pull-right">&euro;{$row['product_price']}</h4>
                                 <h4><a href="item.php?id={$row['product_id']}">{$row['product_title']}</a>
                                 </h4>
-                                <p>See more snippets like this online store item at <a target="_blank" href="http://www.bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                                 <a class="btn btn-primary" target="_blank" href="item.php?id={$row['product_id']}">Add to cart</a>
 
                             </div>
@@ -186,9 +186,9 @@ function get_products_in_admin(){
             <td>{$row['product_price']}</td>
             <td>{$row['product_quantity']}</td>
             <td><a class="btn btn-danger" href="../../resources/templates/back/delete_product.php?id={$row['product_id']}"><span class="glyphicon glyphicon-remove"></span></a></td>
-            
+
         </tr>
-                    
+
 DELIMETER;
         echo $product;
     }
@@ -210,14 +210,14 @@ function add_product(){
         $product_category_id = escape_string($_POST['product_category_id']);
         $product_price = escape_string($_POST['product_price']);
         $product_description = escape_string($_POST['product_description']);
-        $short_desc = escape_string($_POST['short_desc']);
+        //$short_desc = escape_string($_POST['short_desc']);
         $product_quantity = escape_string($_POST['product_quantity']);
         $product_image = escape_string($_FILES['file']['name']);
         $image_temp_location = ($_FILES['file']['tmp_name']);
 
         move_uploaded_file($image_temp_location, UPLOAD_DIRECTORY . DS . $product_image);
 
-        $query = query("INSERT INTO products(product_title,product_category_id,product_price,product_description,short_desc,product_quantity,product_image) VALUES ('{$product_title}','{$product_category_id}','{$product_price}','{$product_description}','{$short_desc}','{$product_quantity}','{$product_image}')");
+        $query = query("INSERT INTO products(product_title,product_category_id,product_price,product_description,product_quantity,product_image) VALUES ('{$product_title}','{$product_category_id}','{$product_price}','{$product_description}','{$product_quantity}','{$product_image}')");
 
         confirm($query);
         set_message("New Product was Added");

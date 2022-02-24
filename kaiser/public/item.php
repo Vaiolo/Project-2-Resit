@@ -26,7 +26,7 @@
     <div class="col-md-5">
 
         <div class="thumbnail">
-         
+
 
     <div class="caption-full">
         <h4><a href="#"><?php echo $row['product_title']; ?></a> </h4>
@@ -34,10 +34,10 @@
         <h4 class=""><?php echo "&euro;" . $row['product_price']; ?></h4>
 
 
-          
-        <p> <?php echo $row['short_desc']; ?></p>
 
-   
+        <p> <?php echo $row['product_description']; ?></p>
+
+
     <form action="">
         <div class="form-group">
             <input type="submit" class="btn btn-primary" value="ADD TO CART">
@@ -45,7 +45,7 @@
     </form>
 
     </div>
- 
+
 </div>
 
 </div>
@@ -99,4 +99,3 @@
 </div>
     <!-- /.container -->
 <?php include ("../resources/templates/front/footer.php"); ?>
-

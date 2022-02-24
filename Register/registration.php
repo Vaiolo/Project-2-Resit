@@ -3,6 +3,7 @@
       require 'conn.php';
 
        // Taking and filtering all 8 values from the form data(input)
+    if(isset($_POST['submit'])){
       if (!empty($_POST['first_name'])) {
         $first_name=filter_input(INPUT_POST, 'first_name', FILTER_SANITIZE_SPECIAL_CHARS);
           if (!empty($_POST['last_name'])) {
@@ -65,9 +66,9 @@
             }  else {echo "Please fill in your address!";}
         }  else {echo "Please fill in your last name!";}
     }  else {echo "Please fill in your first name!";}
+}
 
 ?>
-
 
 <!DOCTYPE html>
 <html>

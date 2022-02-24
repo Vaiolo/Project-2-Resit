@@ -7,7 +7,7 @@
 
 </h1>
 </div>
-               
+
 
 
 <form action="" method="post" enctype="multipart/form-data">
@@ -18,7 +18,7 @@
 <div class="form-group">
     <label for="product-title">Product Title </label>
         <input type="text" name="product_title" class="form-control">
-       
+
     </div>
 
 
@@ -45,8 +45,8 @@
 
 
 
-    
-    
+
+
 
 </div><!--Main Content-->
 
@@ -56,7 +56,7 @@
 
 <aside id="admin_sidebar" class="col-md-4">
 
-     
+
      <div class="form-group">
        <input type="submit" name="draft" class="btn btn-warning btn-lg" value="Draft">
         <input type="submit" name="publish" class="btn btn-primary btn-lg" value="Publish">
@@ -71,7 +71,7 @@
         <select name="product_category_id" id="" class="form-control">
             <option value="">Select Category</option>
             <?php show_categories_add_product_page(); ?>
-           
+
         </select>
 
 
@@ -103,7 +103,7 @@
     <div class="form-group">
         <label for="product-title">Product Image</label>
         <input type="file" name="file">
-      
+
     </div>
 
 
@@ -111,12 +111,5 @@
 </aside><!--SIDEBAR-->
 
 
-    
+
 </form>
-
-
-
-                
-
-
-
