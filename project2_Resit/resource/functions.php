@@ -67,7 +67,7 @@ function fetch_arrray($result)
 
 function get_product()
 {
-    $query = query("SELECT * FROM products");
+    $query = query("SELECT * FROM product");
 
 
     while ($row = fetch_arrray($query)) {
@@ -80,13 +80,13 @@ function get_product()
                         <div class="thumbnail">
                             <img src="http://placehold.it/320x150" alt="">
                             <div class="caption">
-                                <h4 class="pull-right">{$row['product_price']}</h4>
-                                <h4><a href="product.html">{$row['product_title']}</a>
+                                <h4 class="pull-right">{$row['Price']}</h4>
+                                <h4><a href="product.html">{$row['Name']}</a>
                                 </h4>
                                 <p>See more snippets like this online store item at <a target="_blank" href="http://www.bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p>
                              
                             </div>
-                                   <a class="btn btn-primary" target="_blank" href="cart.php?add={$row['product_id']}">Add to cart</a> <!-- add -->
+                                   <a class="btn btn-primary" target="_blank" href="cart.php?add={$row['ProductID']}">Add to cart</a> <!-- add -->
                         </div>
                     </div>
         DELIMETER;
