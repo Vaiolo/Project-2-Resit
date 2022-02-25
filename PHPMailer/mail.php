@@ -33,9 +33,6 @@
 
                 Thank you for completing your registration with us.
 
-                This email serves as a confirmation that your account is activated and that you are officially a part of the family.
-                Enjoy!
-
                 Regards,
                 The team"); // remove if you do not want to send HTML email
                $mail->AltBody = 'HTML not supported';

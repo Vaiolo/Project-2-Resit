@@ -35,6 +35,11 @@
             <input class="form_submit" type="submit" value="submit" name="submit">
         </div>
     </form>
-    <?php include '../header and footer/footer.php';?>
+    <?php
+    if(isset($_POST['submit'])){
+      include("../Phpmailer/mail.php");
+    }
+    
+    include '../header and footer/footer.php';?>
 </body>
 </html>
