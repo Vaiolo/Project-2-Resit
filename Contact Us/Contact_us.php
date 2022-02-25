@@ -36,10 +36,13 @@
         </div>
     </form>
     <?php
-    if(isset($_POST['submit'])){
-      include("../Phpmailer/mail.php");
-    }
-    
     include '../header and footer/footer.php';?>
 </body>
 </html>
+
+
+<?php
+if(isset($_POST['submit'])){
+    include("../Phpmailer/mail.php");
+}
+?>

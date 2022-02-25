@@ -1,3 +1,30 @@
+<?php
+
+$conn = mysqli_connect("localhost","root","","company");
+// Check connection
+if (mysqli_connect_errno())
+  {
+  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+  }
+
+$sql = "SELECT * FROM employee";
+$result = $conn->query($sql);
+
+if(isset($_POST['submit'])){
+    $status=$_POST['status'];
+    $sql="UPDATE employee SET status='$status'";
+    if (!mysqli_query($conn,$sql)) {
+        echo "data not insert";
+    }
+    else
+    {
+        echo "data is insert";
+    }
+
+}
+
+?>
+
 <div class="col-md-12">
 <div class="row">
 <h1 class="page-header">
@@ -10,26 +37,39 @@
     <thead>
 
       <tr>
-           <th>S.N</th>
-           <th>Title</th>
-           <th>Photo</th>
-           <th>Quantity</th>
-           <th>Invoice Number</th>
-           <th>Order Date</th>
-           <th>Status</th>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Contact</th>
+        <th>Status</th>
       </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>21</td>
-            <td>Nikon 234</td>
-
-            <td><img src="http://placehold.it/62x62" alt=""></td>
-            <td>Cameras</td>
-            <td>456464</td>
-            <td>Jun 2039</td>
-           <td>Completed</td>
+      <?php   // LOOP TILL END OF DATA
+          while($rows=$result->fetch_assoc())
+          {
+       ?>
+       <tr>
+            <td><?php echo $rows['employeeID'];?></td>
+            <td><?php echo $rows['employee_name'];?></td>
+            <td><?php echo $rows['employee_email'];?></td>
+            <td><?php echo $rows['employee_contact'];?></td>
+            <td>
+              <form method="post">
+ 					        <select name="status">
+   					        <option>>---Select---<</option>
+   					        <option value="Packed"> Packed</option>
+   					        <option value="Shipped"> Shipped</option>
+   					        <opton value="Delivered"> Delivered</option>
+ 					        </select>
+ 					        <br><br>
+ 					        <input type="submit" name="submit" value="submit">
+ 					    </form>
+            </td>
         </tr>
-    </tbody>
+             <?php
+                  }
+              ?>
+  </tbody>
 </table>
 </div>
