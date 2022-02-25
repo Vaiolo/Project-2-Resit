@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +12,12 @@
     <title>Document</title>
 </head>
 <body>
-    <?php include '../header and footer/header.php';?>
+  <?php
+  if(isset($_SESSION['Email'])) {
+      include('../header and footer/headerLOGGEDIN.php');
+  } else {
+      include('../header and footer/header.php');
+  }?>
     <form>
         <div class="form_header">
             <h1>Contact Us </h1>

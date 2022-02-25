@@ -25,7 +25,7 @@
         </div>
         <div class="right_header">
             <ul>
-                <li class="li_header"><a href="../Home/home.php">Home</a></li>
+                <li class="li_header"><a href="../Home/Home.php">Home</a></li>
                 <li class="li_header"><a href="../Home/shop.php">Shop</a></li>
                 <li class="li_header"><a href="../Login/Login.php">Login</a></li>
                 <li class="li_header"><a href="../Register/registration.php">Registration</a></li>

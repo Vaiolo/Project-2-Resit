@@ -1,6 +1,12 @@
 <?php require_once("../resources/config.php"); ?>
-<?php  include('../header and footer/header.php'); ?>
-<!doctype html>
+<?php
+if(isset($_SESSION['Email'])) {
+    include('../header and footer/headerLOGGEDIN.php');
+} else {
+    include('../header and footer/header.php');
+}?>
+
+<!DOCTYPE html>
 
 <!-- Page Content -->
      <div class="container">
