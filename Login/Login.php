@@ -111,17 +111,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                   <label>Email</label>
                   <div class="inputBox">
-                      <input type="text" name="Email" class="form-control <?php echo (!empty($email_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $email; ?>">
-                      <span class="invalid-feedback"><?php echo $email_err; ?></span>
+                    <input type="text" name="Email" class="form-control <?php echo (!empty($email_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $email; ?>">
+                    <span class="invalid-feedback"><?php echo $email_err; ?></span>
                   </div>
 
                   <label>Password</label>
                   <div class="inputBox">
-                      <input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>">
-                      <span class="invalid-feedback"><?php echo $password_err; ?></span>
+                    <input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>">
+                    <span class="invalid-feedback"><?php echo $password_err; ?></span>
                   </div>
                   <input type="submit" name="login" value="Login">
-                  <input type="submit" name="login" value="Register" id="register">
+                  <div>
+                  <a href="../Register/registration.php" style="color: inherit"; >Register</a>
+                </div>
                 </form>
               </div>
     <?php
