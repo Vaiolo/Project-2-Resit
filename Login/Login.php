@@ -30,7 +30,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Validate credentials
     if(empty($email_err) && empty($password_err)){
         // Prepare a select statement
-        $query = "SELECT Email, Password FROM user WHERE Email = ?";
+        $query = "SELECT Email, Password, AccountType FROM user WHERE Email = ?";
 
         if($stmt = mysqli_prepare($conn, $query)){
             // Bind variables to the prepared statement as parameters
@@ -47,7 +47,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 // Check if username exists, if yes then verify password
                 if(mysqli_stmt_num_rows($stmt) == 1){
                     // Bind result variables
-                    mysqli_stmt_bind_result($stmt, $email, $hashed_password);
+                    mysqli_stmt_bind_result($stmt, $email, $hashed_password, $accountType);
                     if(mysqli_stmt_fetch($stmt)){
                         if(password_verify($password, $hashed_password)){
                             // Password is correct, so start a new session
@@ -56,9 +56,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             // Store data in session variables
                             $_SESSION["loggedin"] = true;
                             $_SESSION["Email"] = $email;
+                            $_SESSION['UserID'] = $id;
 
-                            // Redirect user to welcome page
-                            header("location: ../Home/Home.php");
+                                //} else {
+                            if ($accountType == "Admin") {
+
+                                              header ("Location: ../Home/shop.php");
+                                }
+
+                            elseif ($accountType == "User") {
+                                // Redirect user to welcome page
+                                header("location: ../Home/Home.php");
+                            }
+
                         } else{
                             // Password is not valid, display a generic error message
                             $login_err = "Invalid username or password.";
@@ -76,6 +86,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             mysqli_stmt_close($stmt);
         }
     }
+
 
     // Close connection
     mysqli_close($conn);

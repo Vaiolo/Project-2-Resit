@@ -58,6 +58,7 @@ if(isset($_POST['submit'])){
               <form method="post">
  					        <select name="status">
    					        <option>>---Select---<</option>
+                    <option value="Received"> Received</option>
    					        <option value="Packed"> Packed</option>
    					        <option value="Shipped"> Shipped</option>
    					        <opton value="Delivered"> Delivered</option>

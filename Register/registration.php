@@ -21,7 +21,7 @@
                                   if(!empty($_POST['password'])){
                                     $password=$_POST['password'];
                                     $password=password_hash($password, PASSWORD_DEFAULT);
-                                    $accountType=0;
+                                    $accountType="User";
 
                                       $query="SELECT Email FROM user WHERE Email=? LIMIT 1";
                                             if($statement=mysqli_prepare($conn, $query)){
@@ -39,7 +39,7 @@
                                                     $query = "INSERT INTO user (Firstname, Lastname, City, Address, Email, Country, DateofBirth, Password, AccountType) VALUES (?,?,?,?,?,?,?,?,?)";
 
                                                       if($statement = mysqli_prepare($conn, $query)){
-                                                          mysqli_stmt_bind_param($statement, 'ssssssssi', $first_name, $last_name, $city, $address, $email, $country, $birth, $password, $accountType);
+                                                          mysqli_stmt_bind_param($statement, 'sssssssss', $first_name, $last_name, $city, $address, $email, $country, $birth, $password, $accountType);
                                                           if(mysqli_stmt_execute($statement)){
                                                               echo "Registration Confirmed";
                                                             }else{

@@ -547,3 +547,57 @@ article.amount1 p{
     float: right;
     margin-right: 30px;
 }
+
+/********Orders History********/
+
+.container_login p{
+    padding: 15vh;
+    margin-left: 45vh;
+    margin-top: 30vh;
+    font-size: x-large;
+    font-weight: 700;
+    color: royalblue;
+    inline-size: max-content;
+}
+
+.content_orders table {
+    margin-left: 10vh;
+    font-size: large;
+    border: 1px solid black;
+}
+
+
+.content_orders td {
+    background-color: #1164b4;
+    border: 1px solid black;
+    font-weight: lighter;
+    font-size: medium;
+    color: white;
+}
+
+.content_orders th, td {
+    font-weight: bold;
+    border: 1px solid black;
+    padding: 10px;
+    text-align: center;
+}
+
+
+.content_orders form {
+    width: 10vh;
+    margin-top: 0;
+}
+
+.content_orders input[type=submit] {
+  background-color: #1164b4;
+  color: white;
+  font-weight: lighter;
+  font-size: medium;
+  border: none;
+}
+
+.order_title {
+  padding: 10vh;
+  color: #005aa7;
+
+}
