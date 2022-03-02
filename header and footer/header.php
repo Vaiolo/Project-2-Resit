@@ -33,7 +33,9 @@
                 <li class="li_header"><a href="../Contact Us/Contact_us.php">Contact us</a></li>
             </ul>
         </div>
+        <form action="search.php" method="post">
         <div class="search">
             <input class="header_search" type="text" name="search" placeholder="Search here"><input class="header_submit" type="submit" name="submit" value="Search">
         </div>
+    </form>
 </header>

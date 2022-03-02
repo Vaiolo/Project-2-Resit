@@ -7,7 +7,7 @@ session_start();
 require_once "../Register/conn.php";
 
 // Define variables and initialize with empty values
-$email = $password = "";
+$email = $password = $id = "";
 $email_err = $password_err = $login_err = "";
 
 // Processing form data when form is submitted
@@ -61,12 +61,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                 //} else {
                             if ($accountType == "Admin") {
 
-                                              header ("Location: ../Home/shop.php");
+                                header("Location: ../admin/adminhome.php");
                                 }
 
                             elseif ($accountType == "User") {
                                 // Redirect user to welcome page
-                                header("location: ../Home/Home.php");
+                                header("Location: ../Home/Home.php");
                             }
 
                         } else{

@@ -1,4 +1,4 @@
-<?php require_once("resource/config.php"); ?>
+<?php require_once("../resources/config.php"); ?>
 <?php
 
 
@@ -7,7 +7,7 @@ if(isset($_GET['add']))
 
     $query = query("SELECT * FROM product WHERE ProductID=" . escape_string($_GET['add'])." ");
 
-    while($row = fetch_arrray($query))
+    while($row = fetch_array($query))
     {
 
         if($row['Availability'] != $_SESSION['product_' . $_GET['add']])
@@ -80,36 +80,36 @@ function cart()
 
                 $query = query("SELECT * FROM product WHERE ProductID = " . escape_string($id). " ");
 
-                while($row = fetch_arrray($query)) {
+                while($row = fetch_array($query)) {
                     $sub = $row['Price'] * $value;
                     //$total = 0;
                     //$total_quantity = 0;
 
 
                     $product = <<<DELIMETER
-        
+
         <tr>
                 <td><img src="{$row['product_image']}"</td>
-                
+
                 <td>&#36;{$row['Price']}</td>
                 <td>{$value}</td>
                 <td>&#36;{$sub}</td>
                 <td>
-                    <a class='btn btn-warning' href="cart.php?remove={$row['ProductID']}"><span class='glyphicon glyphicon-minus'></span></a>      
+                    <a class='btn btn-warning' href="cart.php?remove={$row['ProductID']}"><span class='glyphicon glyphicon-minus'></span></a>
                     <a class='btn btn-success' href="cart.php?add={$row['ProductID']}"><span class='glyphicon glyphicon-plus'></span></a>
                     <a class='btn btn-danger' href = "cart.php?delete={$row['ProductID']}"><span class='glyphicon glyphicon-remove'></span></a>
                 </td>
-              
+
             </tr>
-            
-            
-            <!-- *********** PAYPAL******** --> 
-            
-            <input type="hidden" name="item_name_{$item_name}" value="{$row['Name']}"> 
-            <input type="hidden" name="item_number_{$item_number}" value="{$row['ProductID']}"> 
+
+
+            <!-- *********** PAYPAL******** -->
+
+            <input type="hidden" name="item_name_{$item_name}" value="{$row['Name']}">
+            <input type="hidden" name="item_number_{$item_number}" value="{$row['ProductID']}">
             <input type="hidden" name="amount_{$amount}" value="{$row['Price']}">
             <input type="hidden" name="quantity_{$quantity}" value="{$value}">
-        
+            
 DELIMETER;
 
                     echo $product;

@@ -43,38 +43,135 @@ function fetch_array($result){
 /****************************FRONT END FUNCTIONS*********************/
 // get products
 
-function get_products(){
-    $query = query(" SELECT * FROM products");
+function get_products() {
+    $query = query(" SELECT * FROM product");
     confirm($query);
-    while($row = fetch_array($query)){
-        $product_image = display_image($row['product_image']);
-        $product =<<<DELIMETER
-        <div class="col-sm-4 col-lg-4 col-md-4">
-                        <div class="thumbnail">
-                            <a  href="item.php?id={$row['product_id']}"><img src="../resources/{$product_image}" alt=""></a>
-                            <div class="caption">
-                                <h4 class="pull-right">&euro;{$row['product_price']}</h4>
-                                <h4><a href="item.php?id={$row['product_id']}">{$row['product_title']}</a>
-                                </h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                                <a href="item.php?id={$row['product_id']}" class="btn btn-default">More Info</a>
+    $rows = mysqli_num_rows($query);
 
-                            </div>
+    if(isset($_GET['page'])){
+        $page = preg_replace('#[^0-9]#', '', $_GET['page']);
 
-                        </div>
-                    </div>
-DELIMETER;
-echo $product;
+    } else{
+        $page = 1;
     }
-}
+    $perPage = 6;
+    $lastPage = ceil($rows / $perPage);
+
+    if($page < 1){
+
+        $page = 1;
+
+    }elseif($page > $lastPage){
+
+        $page = $lastPage;
+    }
+    $middleNumbers = '';
+
+    $sub1 = $page - 1;
+    $sub2 = $page - 2;
+    $add1 = $page + 1;
+    $add2 = $page + 2;
+
+    if($page == 1){
+
+          $middleNumbers .= '<li class="page-item active"><a>' .$page. '</a></li>';
+
+          $middleNumbers .= '<li class="page-item"><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?page='.$add1.'">' .$add1. '</a></li>';
+
+    } elseif ($page == $lastPage) {
+
+          $middleNumbers .= '<li class="page-item"><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?page='.$sub1.'">' .$sub1. '</a></li>';
+          $middleNumbers .= '<li class="page-item active"><a>' .$page. '</a></li>';
+
+    }elseif ($page > 2 && $page < ($lastPage -1)) {
+
+          $middleNumbers .= '<li class="page-item"><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?page='.$sub2.'">' .$sub2. '</a></li>';
+
+          $middleNumbers .= '<li class="page-item"><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?page='.$sub1.'">' .$sub1. '</a></li>';
+
+          $middleNumbers .= '<li class="page-item active"><a>' .$page. '</a></li>';
+
+             $middleNumbers .= '<li class="page-item"><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?page='.$add1.'">' .$add1. '</a></li>';
+
+          $middleNumbers .= '<li class="page-item"><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?page='.$add2.'">' .$add2. '</a></li>';
+
+
+
+
+    } elseif($page > 1 && $page < $lastPage){
+
+         $middleNumbers .= '<li class="page-item"><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?page= '.$sub1.'">' .$sub1. '</a></li>';
+
+         $middleNumbers .= '<li class="page-item active"><a>' .$page. '</a></li>';
+
+         $middleNumbers .= '<li class="page-item"><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?page='.$add1.'">' .$add1. '</a></li>';
+    }
+
+    $limit = 'LIMIT ' . ($page-1) * $perPage . ',' . $perPage;
+
+    $query2 = query(" SELECT * FROM product $limit");
+    confirm($query2);
+    $outputPagination = "";
+
+
+    if($page != 1){
+
+
+        $prev  = $page - 1;
+
+        $outputPagination .='<li class="page-item"><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?page='.$prev.'">Back</a></li>';
+    }
+
+
+
+    $outputPagination .= $middleNumbers;
+
+    if($page != $lastPage){
+
+
+        $next = $page + 1;
+
+        $outputPagination .='<li class="page-item"><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?page='.$next.'">Next</a></li>';
+
+    }
+    while($row = fetch_array($query2)) {
+
+    $product_image = display_image($row['product_image']);
+
+    $product = <<<DELIMETER
+
+    <div class="col-sm-4 col-lg-4 col-md-4">
+        <div class="thumbnail">
+            <a href="item.php?id={$row['ProductID']}"><img style="height:90px" src="../resources/{$product_image}" alt=""></a>
+            <div class="caption">
+                <h4 class="pull-right">&#36;{$row['Price']}</h4>
+                <h4><a href="item.php?id={$row['ProductID']}">{$row['Name']}</a>
+                </h4>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+                 <a class="btn btn-primary" target="_blank" href="../ShoppingCart/cart.php?add={$row['ProductID']}">Add to cart</a>
+            </div>
+        </div>
+    </div>
+
+    DELIMETER;
+
+    echo $product;
+    }
+
+    
+
+    echo "<div class='text-center'><ul class='pagination'>{$outputPagination}</ul></div>";
+
+
+    }
 
 function get_categories(){
-    $query = query("SELECT * FROM categories");
+    $query = query("SELECT * FROM category");
     confirm($query);
     while($row = fetch_array($query)){
 
 $categories_links =<<<DELIMETER
-<a href='category.php?id={$row['cat_id']}' class='list-group-item'>{$row['cat_title']}</a>
+<a href='category.php?id={$row['CategoryID']}' class='list-group-item'>{$row['CategoryName']}</a>
 DELIMETER;
 
 echo $categories_links;
@@ -82,7 +179,7 @@ echo $categories_links;
 }
 
 function get_products_in_cat_page(){
-    $query = query("SELECT * FROM products WHERE product_category_id =" . escape_string($_GET['id']). " ");
+    $query = query("SELECT * FROM product WHERE Category_ID =" . escape_string($_GET['id']). " ");
     confirm($query);
     while($row = fetch_array($query)){
         $product_image = display_image($row['product_image']);
@@ -91,11 +188,11 @@ function get_products_in_cat_page(){
                 <div class="thumbnail">
                     <img src="../resources/{$product_image}" alt="">
                     <div class="caption">
-                        <h3>{$row['product_title']}</h3>
-                         <h3>&euro;{$row['product_price']}</h3>
+                        <h3>{$row['Name']}</h3>
+                         <h3>&euro;{$row['Price']}</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
                         <p>
-                            <a href="#" class="btn btn-primary">Buy Now!</a> <a href="item.php?id={$row['product_id']}" class="btn btn-default">More Info</a>
+                            <a href="#" class="btn btn-primary">Buy Now!</a> <a href="item.php?id={$row['ProductID']}" class="btn btn-default">More Info</a>
                         </p>
                     </div>
                 </div>
@@ -107,7 +204,7 @@ DELIMETER;
 
 
 function get_products_in_shop_page(){
-    $query = query("SELECT * FROM products");
+    $query = query("SELECT * FROM product");
     confirm($query);
     while($row = fetch_array($query)){
         $product_image = display_image($row['product_image']);
@@ -116,10 +213,10 @@ function get_products_in_shop_page(){
                 <div class="thumbnail">
                     <img src="../resources/{$product_image}" alt="">
                     <div class="caption">
-                        <h3>{$row['product_title']}</h3>
+                        <h3>{$row['Name']}</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
                         <p>
-                            <a href="" class="btn btn-primary">Buy Now!</a> <a href="item.php?id={$row['product_id']}" class="btn btn-default">More Info</a>
+                            <a href="" class="btn btn-primary">Buy Now!</a> <a href="item.php?id={$row['ProductID']}" class="btn btn-default">More Info</a>
                         </p>
                     </div>
                 </div>
@@ -129,64 +226,28 @@ DELIMETER;
     }
 }
 
-function login_user(){
-    if(isset($_POST['submit'])){
-    $username = escape_string($_POST['username']);
-    $password = escape_string($_POST['password']);
 
-    $query = query("SELECT * FROM users WHERE username = '{$username}' AND pass = '{$password}'");
-    confirm($query);
-    if(mysqli_num_rows($query) == 0){
-        set_message("Your password and username are wrong");
-        redirect("login.php");
-        }else{
-        $_SESSION['username'] = $username;
-        redirect("admin");
-    }
-    }
-}
-
-function send_message(){
-    if(isset($_POST['submit'])){
-        $to        ="kaisersunny2016@gmail.com";
-        $from_name = $_POST['name'];
-        $subject   = $_POST['subject'];
-        $email     = $_POST['email'];
-        $message   = $_POST['message'];
-
-        $headers = "From: {$from_name} {$email }";
-
-        $result = mail($to,$subject,$message,$headers );
-
-        if(!$result){
-            set_message("Sorry we could not send your message");
-            redirect("contact.php");
-        }else{
-            set_message("YOUR MESSAGE HAS BEEN SENT");
-        }
-    }
-}
 /**************************** Admin product page *********************/
 function display_image($picture){
     global $upload_directory;
     return $upload_directory . DS . $picture;
 }
 function get_products_in_admin(){
-    $query = query(" SELECT * FROM products");
+    $query = query(" SELECT * FROM product");
     confirm($query);
     while($row = fetch_array($query)){
-    $category = show_product_category_title($row['product_category_id']);
+    $category = show_product_category_title($row['Category_ID']);
     $product_image = display_image($row['product_image']);
         $product =<<<DELIMETER
         <tr>
-            <td>{$row['product_id']}</td>
-            <td>{$row['product_title']} <br>
-             <a href="index.php?edit_product&id={$row['product_id']}"><img width ='150' src="../../resources/{$product_image}" alt=""></a>
+            <td>{$row['ProductID']}</td>
+            <td>{$row['Name']} <br>
+             <a href="adminhome.php?edit_product&id={$row['ProductID']}"><img width ='150' src="../../resources/{$product_image}" alt=""></a>
             </td>
             <td>{$category}</td>
-            <td>{$row['product_price']}</td>
-            <td>{$row['product_quantity']}</td>
-            <td><a class="btn btn-danger" href="../../resources/templates/back/delete_product.php?id={$row['product_id']}"><span class="glyphicon glyphicon-remove"></span></a></td>
+            <td>{$row['Price']}</td>
+            <td>{$row['Availability']}</td>
+            <td><a class="btn btn-danger" href="../../resources/templates/back/delete_product.php?id={$row['ProductID']}"><span class="glyphicon glyphicon-remove"></span></a></td>
 
         </tr>
 
@@ -195,11 +256,11 @@ DELIMETER;
     }
 }
 function show_product_category_title($product_category_id){
-    $category_query = query("SELECT * FROM categories WHERE cat_id = '{$product_category_id}'");
+    $category_query = query("SELECT * FROM category WHERE CategoryID = '{$product_category_id}'");
     confirm($category_query);
 
     while ($category_row = fetch_array($category_query)){
-       return  $category_row['cat_title'];
+       return  $category_row['CategoryName'];
     }
 }
 
@@ -208,12 +269,12 @@ function show_product_category_title($product_category_id){
 function add_product()
 {
     if (isset($_POST['publish'])) {
-        $product_title = escape_string($_POST['product_title']);
-        $product_category_id = escape_string($_POST['product_category_id']);
-        $product_price = escape_string($_POST['product_price']);
-        $product_description = escape_string($_POST['product_description']);
-        $short_desc = escape_string($_POST['short_desc']);
-        $product_quantity = escape_string($_POST['product_quantity']);
+        $product_title = escape_string($_POST['Name']);
+        $product_category_id = escape_string($_POST['Category_ID']);
+        $product_price = escape_string($_POST['Price']);
+        $product_description = escape_string($_POST['Description']);
+      //$short_desc = escape_string($_POST['short_desc']);
+        $product_quantity = escape_string($_POST['Availability']);
         $product_image = escape_string($_FILES['file']['name']);
         $image_temp_location = ($_FILES['file']['tmp_name']);
 
@@ -221,22 +282,22 @@ function add_product()
         if (empty($product_title) || empty($product_price)|| empty ($product_image)) {
             echo "You can not leave it empty";
         } else {
-                $query = query("INSERT INTO products(product_title,product_category_id,product_price,product_description,short_desc,product_quantity,product_image) VALUES ('{$product_title}','{$product_category_id}','{$product_price}','{$product_description}','{$short_desc}','{$product_quantity}','{$product_image}')");
+                $query = query("INSERT INTO product(Name,Category_ID,Price,Description,Availability,product_image) VALUES ('{$product_title}','{$product_category_id}','{$product_price}','{$product_description}','{$product_quantity}','{$product_image}')");
 
                 confirm($query);
                 set_message("New Product was Added");
-                redirect("index.php?products");
+                redirect("adminhome.php?products");
             }
 
     }
 }
 
 function show_categories_add_product_page(){
-    $query = query("SELECT * FROM categories");
+    $query = query("SELECT * FROM category");
     confirm($query);
     while($row = fetch_array($query)){
         $categories_options =<<<DELIMETER
-<option value="{$row['cat_id']}">{$row['cat_title']}</option>
+<option value="{$row['CategoryID']}">{$row['CategoryName']}</option>
 DELIMETER;
 
         echo $categories_options;
@@ -247,17 +308,17 @@ DELIMETER;
 
 function update_product(){
     if(isset($_POST['update'])){
-        $product_title = escape_string($_POST['product_title']);
-        $product_category_id = escape_string($_POST['product_category_id']);
-        $product_price = escape_string($_POST['product_price']);
-        $product_description = escape_string($_POST['product_description']);
-        $short_desc = escape_string($_POST['short_desc']);
-        $product_quantity = escape_string($_POST['product_quantity']);
+        $product_title = escape_string($_POST['Name']);
+        $product_category_id = escape_string($_POST['CategoryID']);
+        $product_price = escape_string($_POST['Price']);
+        $product_description = escape_string($_POST['Description']);
+        //$short_desc = escape_string($_POST['short_desc']);
+        $product_quantity = escape_string($_POST['Availability']);
         $product_image = escape_string($_FILES['file']['name']);
         $image_temp_location = ($_FILES['file']['tmp_name']);
 
         if(empty($product_image)){
-            $get_pic = query("SELECT product_image FROM products WHERE product_id =" .escape_string($_GET['id']). " ");
+              $get_pic = query("SELECT product_image FROM product WHERE ProductID =" .escape_string($_GET['id']). " ");
             confirm($get_pic);
 
             while($pic = fetch_array($get_pic)){
@@ -268,37 +329,37 @@ function update_product(){
 
         move_uploaded_file($image_temp_location, UPLOAD_DIRECTORY . DS . $product_image);
 
-        $query = "UPDATE products SET ";
-        $query .= "product_title          = '{$product_title}', ";
-        $query .= "product_category_id    = '{$product_category_id}', ";
-        $query .= "product_price          = '{$product_price}', ";
-        $query .= "product_description    = '{$product_description}', ";
-        $query .= "short_desc             = '{$short_desc}', ";
-        $query .= "product_quantity       = '{$product_quantity}', ";
+        $query = "UPDATE product SET ";
+        $query .= "Name          = '{$product_title}', ";
+        $query .= "CategoryID    = '{$product_category_id}', ";
+        $query .= "Price          = '{$product_price}', ";
+        $query .= "Description    = '{$product_description}', ";
+        //$query .= "short_desc             = '{$short_desc}', ";
+        $query .= "Availability       = '{$product_quantity}', ";
         $query .= "product_image          = '{$product_image}' ";
-        $query .= "WHERE product_id=" . escape_string($_GET['id']);
+        $query .= "WHERE ProductID=" . escape_string($_GET['id']);
 
         $send_update_query = query($query);
         confirm($send_update_query);
         set_message("Product was updated");
-        redirect("index.php?products");
+        redirect("adminhome.php?products");
     }
 }
 
 /*************************Categories in Admin****************/
 
 function show_categories_in_admin(){
-    $query = query("SELECT * FROM categories");
+    $query = query("SELECT * FROM category");
     confirm($query);
     while($row = fetch_array($query)){
-        $cat_id = $row['cat_id'];
-        $cat_title = $row['cat_title'];
+        $cat_id = $row['CategoryID'];
+        $cat_title = $row['CategoryName'];
 
         $category =<<<DELIMETER
 <tr>
             <td>{$cat_id}</td>
             <td>{$cat_title}</td>
-            <td><a class="btn btn-danger" href="../../resources/templates/back/delete_category.php?id={$row['cat_id']}"><span class="glyphicon glyphicon-remove"></span></a></td>
+            <td><a class="btn btn-danger" href="../../resources/templates/back/delete_category.php?id={$row['CategoryID']}"><span class="glyphicon glyphicon-remove"></span></a></td>
         </tr>
 DELIMETER;
 echo $category;
@@ -307,18 +368,62 @@ echo $category;
 
 function add_category(){
     if(isset($_POST['add_category'])){
-        $cat_title = escape_string($_POST['cat_title']);
+        $cat_title = escape_string($_POST['CategoryName']);
         if(empty($cat_title) || $cat_title == " "){
             echo "This cannot be empty";
         }else {
 
 
-            $insert_cat = query("INSERT INTO categories(cat_title) VALUES('{$cat_title}') ");
+            $insert_cat = query("INSERT INTO category(CategoryName) VALUES('{$cat_title}') ");
             confirm($insert_cat);
             set_message("Category created");
 
         }
     }
 }
+
+/**********************Search function**************************/
+function search()
+{
+    if (isset($_POST['submit'])) {
+        $search = $_POST['search'];
+        if (empty($search) || $search == "") {
+            echo "THIS FIELD CANNOT BE BLANK";
+        } else {
+            $query = query("SELECT * FROM product WHERE Name LIKE '%$search%'");
+            confirm($query);
+            $count = mysqli_num_rows($query);
+            if ($count == 0) {
+                echo "<h1> NO RESULT </h1>";
+            } else {
+
+
+                while ($row = fetch_array($query)) {
+                    $product_image = display_image($row['product_image']);
+                    $search = <<<DELIMETER
+        <div class="col-sm-4 col-lg-4 col-md-4">
+                        <div class="thumbnail">
+                            <a  href="item.php?id={$row['ProductID']}"><img src="../resources/{$product_image}" alt=""></a>
+                            <div class="caption">
+                                <h4 class="pull-right">&euro;{$row['Price']}</h4>
+                                <h4><a href="item.php?id={$row['ProductID']}">{$row['Name']}</a>
+                                </h4>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                                <a class="btn btn-primary" target="_blank" href="item.php?id={$row['ProductID']}">Add to cart</a>
+
+                            </div>
+
+                        </div>
+                    </div>
+DELIMETER;
+                    echo $search;
+                }
+            }
+        }
+
+
+    }
+}
+
 
 ?>

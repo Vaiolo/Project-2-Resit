@@ -1,4 +1,4 @@
-<?php require_once("resource/config.php"); ?>
+<?php require_once("../resources/config.php"); ?>
 <?php require_once("cart.php"); ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +18,12 @@
 
 <body>
 
-<?php include("header.php"); ?>
+  <?php
+  if(isset($_SESSION['Email'])) {
+      include('../header and footer/headerLOGGEDIN.php');
+  } else {
+      include('../header and footer/header.php');
+  }?>
 
 <?php echo display_message();  ?>
 
@@ -97,7 +102,7 @@
 </div>
 
 <!--Main Content end here-->
-<?php include("footer.php"); ?>
+<?php include '../header and footer/footer.php';?>
 
 
 </body>
