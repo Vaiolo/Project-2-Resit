@@ -93,11 +93,11 @@
    <div class="form-group">
      <label for="">Discount Percent</label>
         <input type="number" name="discount_percent" id="discount_percent" class="form-control">
-   </div>       
+   </div>
    <div class="form-group">
      <label for="">Discount Due Date</label>
         <input type="date" name="dis_end_date" id="dis_end_date"  class="form-control">
-   </div>    
+   </div>
 <!--discount price box end-->
 
     <!-- Product Image -->
@@ -116,24 +116,6 @@
 <!--        <input type="text" name="product_tags" class="form-control">-->
 <!--    </div>-->
 
-<!--discount price box-->
-<div class="form-group">
-     <label for="">Discount Percent</label>
-        <input type="number" name="discount_percent" id="discount_percent" class="form-control">
-   </div>       
-   <div class="form-group">
-     <label for="">Discount Due Date</label>
-        <input type="date" name="dis_end_date" id="dis_end_date"  class="form-control">
-   </div>    
-
-
-    <!-- Product Image -->
-    <div class="form-group">
-        <label for="product-title">Product Image</label>
-        <input type="file" name="file">
-
-    </div>
-
 
 
 </aside><!--SIDEBAR-->
@@ -141,5 +123,5 @@
 <br>
 <br>
 <br>
-    
+
 </form>

@@ -8,7 +8,6 @@
                 <li class="li_header"><a href="../Home/shop.php">Shop</a></li>
                 <li class="li_header"><a href="../Login/logout.php">Logout</a></li>
                 <li class="li_header"><a href="../Orders/ordershistory.php">Orders</a></li>
-                <li class="li_header"><a href="../Contact Us/Contact_us.php">Contact us</a></li>
             </ul>
         </div>
         <div class="search">
