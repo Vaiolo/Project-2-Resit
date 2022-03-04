@@ -390,6 +390,19 @@ function add_category(){
     }
 }
 
+function get_categories(){
+    $query = query("SELECT * FROM Category");
+    confirm($query);
+    while($row = fetch_array($query)){
+
+$categories_links =<<<DELIMETER
+<a href='category.php?id={$row['CategoryID']}' class='list-group-item'>{$row['CategoryName']}</a>
+DELIMETER;
+
+echo $categories_links;
+    }
+}
+
 /**********************Search function**************************/
 function search()
 {
