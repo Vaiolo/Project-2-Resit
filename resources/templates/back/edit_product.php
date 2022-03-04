@@ -1,16 +1,18 @@
 <?php
 if(isset($_GET['id'])){
-    $query = query("SELECT * FROM products WHERE product_id = " . escape_string($_GET['id']) . " ");
+    $query = query("SELECT * FROM product WHERE ProductId = " . escape_string($_GET['id']) . " ");
     confirm($query);
 
     while($row = fetch_array($query)){
-        $product_title = escape_string($row['product_title']);
-        $product_category_id = escape_string($row['product_category_id']);
-        $product_price = escape_string($row['product_price']);
-        $product_description = escape_string($row['product_description']);
-        $short_desc = escape_string($row['short_desc']);
-        $product_quantity = escape_string($row['product_quantity']);
+        $product_title = escape_string($row['Name']);
+        $product_category_id = escape_string($row['Category_ID']);
+        $product_price = escape_string($row['Price']);
+        $product_description = escape_string($row['Description']);
+        //$short_desc = escape_string($row['short_desc']);
+        $product_quantity = escape_string($row['Availability']);
         $product_image = escape_string($row['product_image']);
+        $discount_percent = escape_string($row['discount_percent']);
+        $dis_end_date = escape_string($row['dis_end_date']);
 
         $product_image = display_image($row['product_image']);
     }
