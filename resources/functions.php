@@ -316,7 +316,7 @@ function get_products_in_admin(){
             <td>{$category}</td>
             <td>{$row['Price']}</td>
             <td>{$row['Availability']}</td>
-            <td><a class="btn btn-danger" href="../../resources/templates/back/delete_product.php?id={$row['ProductID']}"><span class="glyphicon glyphicon-remove"></span></a></td>
+            <td><a class="btn btn-danger" href="../resources/templates/back/delete_product.php?id={$row['ProductID']}"><span class="glyphicon glyphicon-remove"></span></a></td>
 
         </tr>
 

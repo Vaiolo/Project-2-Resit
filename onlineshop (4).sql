@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 04, 2022 at 10:09 AM
+-- Generation Time: Mar 04, 2022 at 01:29 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.9
 
@@ -77,7 +77,7 @@ CREATE TABLE `ordertrack` (
 --
 
 INSERT INTO `ordertrack` (`HistoryID`, `OrderID`, `Date`, `Status`) VALUES
-(4, 1, '2022-03-04', 'Received');
+(4, 1, '2022-03-04', 'Packed');
 
 -- --------------------------------------------------------
 
@@ -110,13 +110,6 @@ CREATE TABLE `product` (
   `discount_due_date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `product`
---
-
-INSERT INTO `product` (`ProductID`, `Category_ID`, `Name`, `Price`, `Description`, `Availability`, `product_image`, `Age`, `discount_percent`, `discount_due_date`) VALUES
-(1, 0, 'Bro', 15, 'Bro', 15, 'justitia-2597016_640.png', NULL, 0, '2022-03-08');
-
 -- --------------------------------------------------------
 
 --
@@ -129,16 +122,6 @@ CREATE TABLE `shoppingcart_row` (
   `ProductID` int(11) NOT NULL,
   `Dateoftheorder` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `shoppingcart_row`
---
-
-INSERT INTO `shoppingcart_row` (`CartID`, `UserID`, `ProductID`, `Dateoftheorder`) VALUES
-(1, 4, 1, '0000-00-00'),
-(2, 4, 1, '0000-00-00'),
-(3, 4, 1, '0000-00-00'),
-(4, 2, 1, '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -167,7 +150,8 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`UserID`, `FirstName`, `LastName`, `Email`, `Password`, `Address`, `City`, `Country`, `AccountType`, `DateofBirth`, `Feedback`) VALUES
 (1, 'Violetta', 'Fazzi', 'violettafazzi@gmail.com', '$2y$10$1nkVzlfhpNYs6DI3LU4EI.MCa5c2UumlEjirOjHPKTaw5braNdIxK', 'Via Angelo Mangani', 'Viterbo', 'Italia', 'User', '2002-05-07', NULL),
 (2, 'Violetta', 'Fazzi', 'kimt070502@gmail.com', '$2y$10$XV9rSZ1mA1GvTgSBfJp6tOVZIfB61qrMBO1wRUNbeFxXApd1JNxEW', 'Via Angelo Mangani', 'Viterbo', 'Italia', 'Admin', '2002-05-07', NULL),
-(4, 'Violetta', 'Fazzi', 'bequadro@libero.it', '$2y$10$q39VPBrbXVct0VOzVvxrRulnQhG6vhE2OWkKCVc52AN8DpA/f9Rwa', 'Via Angelo Mangani', 'Viterbo', 'Italia', 'User', '2002-05-07', NULL);
+(4, 'Violetta', 'Fazzi', 'bequadro@libero.it', '$2y$10$q39VPBrbXVct0VOzVvxrRulnQhG6vhE2OWkKCVc52AN8DpA/f9Rwa', 'Via Angelo Mangani', 'Viterbo', 'Italia', 'User', '2002-05-07', NULL),
+(7, 'Violetta', 'Fazzi', 'mikafreak02@gmail.com', '$2y$10$kwIm4eDnOJUNzBDxNrFBV.gJDPvx5QrqWVJE.Fyb7V.NN435lYunO', 'Via Angelo Mangani', 'Viterbo', 'Italia', 'User', '2002-05-07', NULL);
 
 --
 -- Indexes for dumped tables
@@ -246,7 +230,7 @@ ALTER TABLE `ordertrack`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `ProductID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ProductID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `shoppingcart_row`
@@ -258,7 +242,7 @@ ALTER TABLE `shoppingcart_row`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
@@ -268,27 +252,27 @@ ALTER TABLE `user`
 -- Constraints for table `orders`
 --
 ALTER TABLE `orders`
-  ADD CONSTRAINT `fk2_UserID` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`);
+  ADD CONSTRAINT `fk2_UserID` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `ordertrack`
 --
 ALTER TABLE `ordertrack`
-  ADD CONSTRAINT `fk_OrderID` FOREIGN KEY (`OrderID`) REFERENCES `orders` (`OrderID`);
+  ADD CONSTRAINT `fk_OrderID` FOREIGN KEY (`OrderID`) REFERENCES `orders` (`OrderID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `order_row`
 --
 ALTER TABLE `order_row`
-  ADD CONSTRAINT `fk1_OrderID` FOREIGN KEY (`OrderID`) REFERENCES `orders` (`OrderID`),
-  ADD CONSTRAINT `fk1_ProductID` FOREIGN KEY (`ProductID`) REFERENCES `product` (`ProductID`);
+  ADD CONSTRAINT `fk1_OrderID` FOREIGN KEY (`OrderID`) REFERENCES `orders` (`OrderID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk1_ProductID` FOREIGN KEY (`ProductID`) REFERENCES `product` (`ProductID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `shoppingcart_row`
 --
 ALTER TABLE `shoppingcart_row`
-  ADD CONSTRAINT `fk1_UserID` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`),
-  ADD CONSTRAINT `fk2_ProductID` FOREIGN KEY (`ProductID`) REFERENCES `product` (`ProductID`);
+  ADD CONSTRAINT `fk1_UserID` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk2_ProductID` FOREIGN KEY (`ProductID`) REFERENCES `product` (`ProductID`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
