@@ -96,7 +96,6 @@
 
             </tr>
 
-
             <!-- *********** PAYPAL******** -->
 
             <input type="hidden" name="item_name_{$item_name}" value="{$row['Name']}">
@@ -113,11 +112,7 @@ DELIMETER;
 
                     $data = [
 
-
-
                         $test, $testid, $testprice, $testquatity
-
-
                     ];
 
                     print_r( $data);
@@ -137,6 +132,7 @@ DELIMETER;
                         $stmt->execute();
                         $stmt->close();
                     } */
+
                     echo $product;
 
                     $item_name++;
