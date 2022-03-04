@@ -90,7 +90,6 @@ function cart()
 
         <tr>
                 <td><img src="{$row['product_image']}"</td>
-                $fh
                 <td>&#36;{$row['Price']}</td>
                 <td>{$value}</td>
                 <td>&#36;{$sub}</td>
@@ -111,6 +110,39 @@ function cart()
             <input type="hidden" name="quantity_{$quantity}" value="{$value}">
 
 DELIMETER;
+
+                   /* $test = $row['product_title'];  //  trying to insert the value from PAYPAL into database
+                    $testid =  $row['product_id'];
+                    $testprice = $row['product_price'];
+                    $testquatity = $value;
+
+                    $data = [
+
+
+
+                        $test, $testid, $testprice, $testquatity
+
+
+                    ];
+
+                    print_r( $data);
+
+                    if(isset($_POST['submit'])) {
+
+                        $stmt = query("INSERT INTO payments (title, id, price, quantity, createdtime) VALUES(?, ?, ?, ?, ?)");
+
+                        $stmt->bind_param(
+                            'ssdss',
+                            $data["$test"],
+                            $data["$testid"],
+                            $data["$testprice"],
+                            $data["$testquatity"],
+                            date('Y-m-d H:i:s')
+                        );
+                        $stmt->execute();
+                        $stmt->close();
+                    } */
+
 
                     echo $product;
 
@@ -150,7 +182,17 @@ function show_paypal() // delimeter for not changing the quotes
 
 
 DELIMETER;
+
+
+
+
+
+
+
+
         return $paypal_button;
+
+
 
 
     }
