@@ -5,9 +5,9 @@ if(isset($_GET['id'])){
     confirm($query);
 
     set_message("Product Deleted");
-   redirect("../admin/index.php?products");
+   redirect("../admin/adminhome.php?products");
 } else{
-    redirect("../admin/index.php?products");
+    redirect("../admin/adminhome.php?products");
 }
 
 ?>
