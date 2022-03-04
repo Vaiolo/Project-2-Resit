@@ -5,14 +5,14 @@
 if(isset($_GET['add'])) //if add is pressed
 {
 
-    $query = query("SELECT * FROM product WHERE ProductID=" . escape_string($_GET['add'])." ");
+    $query = query("SELECT * FROM product WHERE ProductID=" . escape_string($_GET['add'])." "); //select the product from table
 
     while($row = fetch_array($query))
     {
 
         if($row['Availability'] != $_SESSION['product_' . $_GET['add']])
         {
-            $_SESSION['product_' . $_GET['add']] +=1;
+            $_SESSION['product_' . $_GET['add']] +=1; //when the + is pressed will add 1 more at quantity
             redirect("checkout.php");
         }
         else
@@ -33,7 +33,7 @@ if(isset($_GET['add'])) //if add is pressed
 if(isset($_GET['remove'])) //if remove is pressed
 {
     $_SESSION['product_' . $_GET['remove']]--;
-    if($_SESSION['product_' . $_GET['remove']] < 1)
+    if($_SESSION['product_' . $_GET['remove']] < 1) //when the - is pressed will minus 1 from quantity
     {
         unset($_SESSION['item_quantity']);
         unset($_SESSION['item_total']);
