@@ -1,6 +1,5 @@
 <?php
 require_once("../resources/config.php"); ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,6 +8,30 @@ require_once("../resources/config.php"); ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="style.css">
     <title>Document</title>
+    <style>
+        /* discount css */
+        h4.pull-right.line_throw_price {
+            text-decoration: line-through;
+            padding: 0px 10px;
+            font-size: 15px;
+            opacity: 0.7;
+        }
+        p.percent_off {
+            text-align: end;
+            display: block;
+            position: absolute;
+            right: 17px;
+            opacity: 0.7;
+            top: 1px;
+            font-size: 12px;
+        }
+        h4.pull-right.discount_price {
+            display: block;
+        }
+        .caption {
+            position: relative;
+        }
+    </style>
 </head>
 <body>
 
@@ -20,22 +43,14 @@ if(isset($_SESSION['Email'])) {
 }?>
 
 <div class="container">
-
-<div class="row">
-
-   <?php include ("../resources/templates/front/side_nav.php"); ?>
-
-   <div class="col-md-9">
-
-       <div class="row">
-       <?php get_products() ?>
-
-       </div><!--row ends here -->
-
-   </div>
-
-</div>
-
+    <div class="row">
+        <?php include ("../resources/templates/front/side_nav.php"); ?>
+        <div class="col-md-9">
+            <div class="row">
+                <?php get_products() ?>
+            </div>
+        </div>
+    </div>
 </div>
 <?php include '../header and footer/footer.php';?>
 </body>
