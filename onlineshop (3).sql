@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 04, 2022 at 10:04 AM
+-- Generation Time: Mar 04, 2022 at 10:09 AM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.9
 
@@ -71,6 +71,13 @@ CREATE TABLE `ordertrack` (
   `Date` date NOT NULL,
   `Status` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `ordertrack`
+--
+
+INSERT INTO `ordertrack` (`HistoryID`, `OrderID`, `Date`, `Status`) VALUES
+(4, 1, '2022-03-04', 'Received');
 
 -- --------------------------------------------------------
 
@@ -233,7 +240,7 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `ordertrack`
 --
 ALTER TABLE `ordertrack`
-  MODIFY `HistoryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `HistoryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `product`
