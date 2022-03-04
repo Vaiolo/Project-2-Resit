@@ -2,7 +2,7 @@
 <?php  include('../header and footer/header.php'); ?>
 <div class="container">
     <?php include ("../resources/templates/front/side_nav.php"); ?>
-    <?php $query = query(" SELECT * FROM products WHERE product_id =" . escape_string($_GET['id']). " ");
+    <?php $query = query(" SELECT * FROM product WHERE ProductID =" . escape_string($_GET['id']). " ");
     confirm($query);
     while($row = fetch_array($query)):
 
@@ -17,36 +17,35 @@
         <div class="col-md-5">
             <div class="thumbnail">
                 <div class="caption-full">
-                    <h4><a  href="#"><?php echo $row['product_title']; ?></a> </h4>
+                    <h4><a  href="#"><?php echo $row['Name']; ?></a> </h4>
 <?php
 if( $row['discount_percent'] >= 1 ){
-    $original_price= (int)$row['product_price'];
+    $original_price= (int)$row['Price'];
     $discount_percent= (int)$row['discount_percent'];
     $dis_end_date= $row['dis_end_date'];
     $current_date= date("Y-m-d");
     $discount_value = ($original_price / 100) * $discount_percent;
     $discount_price = $original_price - $discount_value;
-    
+
     if($dis_end_date > $current_date){
-        echo '<h4 class="pull-right line_throw_price">'. $row['product_price'] .'</h4>
+        echo '<h4 class="pull-right line_throw_price">'. $row['Price'] .'</h4>
             <h4 class="pull-right discount_price">&euro;'. $discount_price .'</h4>
             <p class="percent_off">'. $discount_percent .'%  off</p>
             ';
     }else{
-    echo '<h4 class="pull-right">&euro;'. $row['product_price'] .'00</h4>';
+    echo '<h4 class="pull-right">&euro;'. $row['Price'] .'00</h4>';
     }
 }else{
-    echo '<h4 class="pull-right">&euro;'. $row['product_price'] .'</h4>';
+    echo '<h4 class="pull-right">&euro;'. $row['Price'] .'</h4>';
 }
 ?>
 <br>
         <hr>
-        <!-- <h4 class=""><?php echo "&euro;" . $row['product_price']; ?></h4> -->
-        <p> <?php echo $row['short_desc']; ?></p>
+        <!-- <h4 class=""><?php echo "&euro;" . $row['Price']; ?></h4> -->
         <a class ="btn btn-primary" target="_blank" href="#">Add to cart</a>
 
     </div>
- 
+
 </div>
 
 </div>
@@ -61,7 +60,7 @@ if( $row['discount_percent'] >= 1 ){
             </ul>
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="home">
-                    <p> <?php echo  $row['product_description']; ?> </p>
+                    <p> <?php echo  $row['Description']; ?> </p>
                 </div>
             </div>
         </div>
@@ -71,4 +70,3 @@ if( $row['discount_percent'] >= 1 ){
 </div>
 </div>
 <?php include '../header and footer/footer.php';?>
-

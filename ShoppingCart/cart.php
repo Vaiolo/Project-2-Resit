@@ -1,4 +1,4 @@
-<?php require_once("resource/config.php"); ?>
+<?php require_once("../resources/config.php"); ?>
 <?php
 
 
@@ -7,7 +7,7 @@ if(isset($_GET['add'])) //if add is pressed
 
     $query = query("SELECT * FROM product WHERE ProductID=" . escape_string($_GET['add'])." ");
 
-    while($row = fetch_arrray($query))
+    while($row = fetch_array($query))
     {
 
         if($row['Availability'] != $_SESSION['product_' . $_GET['add']])
@@ -80,7 +80,7 @@ function cart()
 
                 $query = query("SELECT * FROM product WHERE ProductID = " . escape_string($id). " ");
 
-                while($row = fetch_arrray($query)) {
+                while($row = fetch_array($query)) {
                     $sub = $row['Price'] * $value;
                     //$total = 0;
                     //$total_quantity = 0;
