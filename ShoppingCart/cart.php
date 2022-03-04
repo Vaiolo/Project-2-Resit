@@ -1,13 +1,13 @@
-<?php require_once("../resources/config.php"); ?>
+<?php require_once("resource/config.php"); ?>
 <?php
 
 
-if(isset($_GET['add']))
+if(isset($_GET['add'])) //if add is pressed
 {
 
     $query = query("SELECT * FROM product WHERE ProductID=" . escape_string($_GET['add'])." ");
 
-    while($row = fetch_array($query))
+    while($row = fetch_arrray($query))
     {
 
         if($row['Availability'] != $_SESSION['product_' . $_GET['add']])
@@ -17,7 +17,7 @@ if(isset($_GET['add']))
         }
         else
         {
-            set_message("We only have" . $row['Availability'] ." " . "{$row['Name']}"." availabe");
+            set_message("We only have" . $row['Availability'] ." " . "{$row['Name']}"." availabe"); // will display the amount of quantity of a product
             redirect("checkout.php");
         }
 
@@ -30,7 +30,7 @@ if(isset($_GET['add']))
 
 }
 
-if(isset($_GET['remove']))
+if(isset($_GET['remove'])) //if remove is pressed
 {
     $_SESSION['product_' . $_GET['remove']]--;
     if($_SESSION['product_' . $_GET['remove']] < 1)
@@ -80,7 +80,7 @@ function cart()
 
                 $query = query("SELECT * FROM product WHERE ProductID = " . escape_string($id). " ");
 
-                while($row = fetch_array($query)) {
+                while($row = fetch_arrray($query)) {
                     $sub = $row['Price'] * $value;
                     //$total = 0;
                     //$total_quantity = 0;
@@ -90,7 +90,7 @@ function cart()
 
         <tr>
                 <td><img src="{$row['product_image']}"</td>
-
+                $fh
                 <td>&#36;{$row['Price']}</td>
                 <td>{$value}</td>
                 <td>&#36;{$sub}</td>
@@ -109,7 +109,7 @@ function cart()
             <input type="hidden" name="item_number_{$item_number}" value="{$row['ProductID']}">
             <input type="hidden" name="amount_{$amount}" value="{$row['Price']}">
             <input type="hidden" name="quantity_{$quantity}" value="{$value}">
-            
+
 DELIMETER;
 
                     echo $product;

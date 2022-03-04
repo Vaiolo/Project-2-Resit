@@ -1,76 +1,114 @@
 <?php
 
-$conn = mysqli_connect("localhost","root","","company");
-// Check connection
-if (mysqli_connect_errno())
-  {
-  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+function sendData(){
+  if($_SERVER['REQUEST_METHOD']==='GET'){
+    if(array_key_exists('id', $_GET) && array_key_exists('Status', $_GET)) {
+
+    $id = $_GET['id'];
+    $status = $_GET['Status'];
+
+    $con = mysqli_connect("localhost","root","","onlineshop");
+
+          $query = $con->prepare("UPDATE ordertrack SET Status=? WHERE HistoryID = ?");
+
+          if(!$query) {
+            die('Prepare failed' . mysqli_error($con));
+          }
+
+          $query -> bind_param('ss', $status, $id);
+
+          if(!$query) {
+            die('Prepare failed' . mysqli_error($con));
+          }
+
+          $query ->execute();
+
+          if(!$query) {
+            die('Prepare failed' . mysqli_error($con));
+          }
+          $query->close();
+    }
   }
-
-$sql = "SELECT * FROM employee";
-$result = $conn->query($sql);
-
-if(isset($_POST['submit'])){
-    $status=$_POST['status'];
-    $sql="UPDATE employee SET status='$status'";
-    if (!mysqli_query($conn,$sql)) {
-        echo "data not insert";
-    }
-    else
-    {
-        echo "data is insert";
-    }
-
 }
+
 
 ?>
 
-<div class="col-md-12">
-<div class="row">
-<h1 class="page-header">
-   All Orders
-</h1>
-</div>
+  <div class="col-md-12">
+  <div class="row">
+  <h1 class="page-header">
+     All Orders
+  </h1>
+  </div>
 
-<div class="row">
-<table class="table table-hover">
-    <thead>
+  <div class="row">
+    <?php
 
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Contact</th>
-        <th>Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      <?php   // LOOP TILL END OF DATA
-          while($rows=$result->fetch_assoc())
-          {
-       ?>
-       <tr>
-            <td><?php echo $rows['employeeID'];?></td>
-            <td><?php echo $rows['employee_name'];?></td>
-            <td><?php echo $rows['employee_email'];?></td>
-            <td><?php echo $rows['employee_contact'];?></td>
-            <td>
-              <form method="post">
- 					        <select name="status">
-   					        <option>>---Select---<</option>
-                    <option value="Received"> Received</option>
-   					        <option value="Packed"> Packed</option>
-   					        <option value="Shipped"> Shipped</option>
-   					        <opton value="Delivered"> Delivered</option>
- 					        </select>
- 					        <br><br>
- 					        <input type="submit" name="submit" value="submit">
- 					    </form>
-            </td>
+    //echo $_GET['id'];
+  if($_SERVER['REQUEST_METHOD']==='GET'){
+
+    //echo $_GET['id'];
+
+
+
+    $con = mysqli_connect("localhost","root","","onlineshop");
+
+          $query = $con->prepare("SELECT * FROM ordertrack");
+
+          if(!$query) {
+            die('Prepare failed' . mysqli_error($con));
+          }
+
+          $query ->execute();
+
+          if(!$query) {
+            die('Prepare failed' . mysqli_error($con));
+          }
+
+          $result = $query->get_result();
+
+          $data = $result->fetch_all(MYSQLI_ASSOC);
+
+          $query->close();
+  }
+
+      foreach($data as $row){
+    ?>
+    <?php sendData(); ?>
+      <table class="table table-hover">
+        <tr>
+          <td>ID</td>
+          <td>OrderID</td>
+          <td>Date</td>
+          <td>Status</td>
         </tr>
-             <?php
-                  }
-              ?>
-  </tbody>
-</table>
+
+        <tr>
+          <td><?php echo $row['HistoryID']; ?></td>
+          <td><?php echo $row['OrderID']; ?></td>
+          <td><?php echo $row['Date']; ?></td>
+          <td>
+            <form method= "get">
+              <input type="hidden" name="orders" value="1" />
+              <input type="hidden" name="id" value="<?php echo $row['HistoryID']; ?>" />
+                <select name="Status">
+                  <option>>---Select---<</option>
+                  <option value="Received"> Received</option>
+                  <option value="Packed"> Packed</option>
+                  <option value="Shipped"> Shipped</option>
+                  <opton value="Delivered"> Delivered</option>
+                </select>
+
+                <br><br>
+                <input type="submit" name="submit" value="submit" />
+              </form>
+          </td>
+        </tr>
+      </table>
+    <?php
+      }
+    ?>
 </div>
+<?php
+include ('footer.php');
+?>

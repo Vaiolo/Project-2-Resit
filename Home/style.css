@@ -23,6 +23,8 @@ body{
 .header_logo{
     color: white;
 }
+
+
 .footer_about{
     color: white;
 }
@@ -130,6 +132,10 @@ footer{
     margin-left: 10vh;
 }
 
+.left_footer img {
+  width: 30vh;
+}
+
 .center_footer {
   margin-top: -20.5vh;
   margin-right: 3vh;
@@ -167,7 +173,13 @@ footer{
 /*...................................................Contact us form.................................................. */
 .form_header{
     text-align: center;
+    color: #005aa7;
+    margin-bottom: 5vh;
 }
+
+.form_header h3 {
+}
+
 form{
     width: 109vh;
     margin: 0 auto;

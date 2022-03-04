@@ -44,7 +44,7 @@ function fetch_array($result){
 // get products
 
 function get_products() {
-    $query = query(" SELECT * FROM product");
+    $query = query("SELECT * FROM product");
     confirm($query);
     $rows = mysqli_num_rows($query);
 
@@ -158,7 +158,7 @@ function get_products() {
     echo $product;
     }
 
-    
+
 
     echo "<div class='text-center'><ul class='pagination'>{$outputPagination}</ul></div>";
 

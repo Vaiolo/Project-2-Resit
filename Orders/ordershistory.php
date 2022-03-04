@@ -1,3 +1,7 @@
+<?php
+    include('../Register/conn.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,25 +35,44 @@
 
       <table>
         <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Total</th>
-            <th>Status</th>
-            <th></th>
-        </tr>
+          <td>OrderID</td>
+          <td>Date</td>
+          <td>Status</td>
+
 
         <?php
-                  include('config.php');
-                  $query=mysqli_query($conn,"SELECT * FROM `employee`");
-                  while($row=mysqli_fetch_array($query)){
+
+
+                  $query = $conn->prepare("SELECT * FROM ordertrack");
+
+                  if(!$query) {
+                    die('Prepare failed' . mysqli_error($con));
+                  }
+
+                  $query ->execute();
+
+                  if(!$query) {
+                    die('Prepare failed' . mysqli_error($con));
+                  }
+                  $result = $query->get_result();
+
+                  $data = $result->fetch_all(MYSQLI_ASSOC);
+
+                  $query->close();
+
+
+                  foreach($data as $row){
+
+                  //while($row=mysqli_fetch_array($query)){
                       ?>
+                      <th <?php if($row['Status'] === 'Packed' || $row['Status'] === 'Shipped') {echo 'style=display:none;';} ?>></th>
+                      </tr>
                       <tr>
-                          <td><?php echo $row['employee_name']; ?></td>
-                          <td><?php echo $row['employee_email']; ?></td>
-                          <td><?php echo $row['employee_contact']; ?></td>
-                          <td><?php echo $row['status']; ?></td>
-                          <td>
-                              <a href="delete.php?id=<?php echo $row['employeeID']; ?>">Delete</a>
+                          <td><?php echo $row['OrderID']; ?></td>
+                          <td><?php echo $row['Date']; ?></td>
+                          <td><?php echo $row['Status']; ?></td>
+                          <td <?php if($row['Status'] === 'Packed' || $row['Status'] === 'Shipped') {echo 'style=display:none;';} ?>>
+                              <a href="delete.php?id=<?php echo $row['HistoryID']; ?>">Delete</a>
                           </td>
                       </tr>
                       <?php

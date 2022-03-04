@@ -10,7 +10,7 @@
                 if($_SERVER['REQUEST_URI'] == "/Project-2-Resit-main/admin/" ||$_SERVER['REQUEST_URI'] == "/Project-2-Resit-main/admin/adminhome.php"){
                     include ("../resources/templates/back/admin_content.php");
                 }
-                if(isset($_GET['orders'])){
+                if(isset($_GET['orders']) == 1){
                 include ("../resources/templates/back/orders.php");
                 }
                 if(isset($_GET['categories'])){

@@ -1,6 +1,6 @@
 <footer>
         <div class="left_footer">
-            <img src="../images/logo.PNG" alt="logo">
+            <img src="../header and footer/images/logo.PNG" alt="logo">
         </div>
         <div class="center_footer">
             <h3 class="footer_about"><u>About NHL WEBSHOP</u></h3>

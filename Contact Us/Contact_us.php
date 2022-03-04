@@ -21,24 +21,13 @@ session_start();
     <form>
         <div class="form_header">
             <h1>Contact Us </h1>
+            <h3>Give us a feedback on our service!</h3>
         </div>
-        <div>
-            <label for ="Name">Name</label>
-        </div>
-        <input class="form_text" type="text" name="name">
-        <div>
-            <label for ="Email">Email</label>
-        </div>
-        <input class="form_text" type="text" name="name">
-        <div>
-            <label for ="subject">Subject</label>
-        </div>
-        <input class="form_text" type="text" name="name">
         <div>
             <label for ="message">Message</label>
         </div>
         <div>
-            <textarea name="textarea" placeholder="Type here..."></textarea>
+            <textarea name="suggestion" placeholder="Type here..."></textarea>
         </div>
         <div>
             <input class="form_submit" type="submit" value="submit" name="submit">
@@ -48,10 +37,3 @@ session_start();
     include '../header and footer/footer.php';?>
 </body>
 </html>
-
-
-<?php
-if(isset($_POST['submit'])){
-    include("../Phpmailer/mail.php");
-}
-?>
