@@ -43,76 +43,124 @@ function fetch_array($result){
 /****************************FRONT END FUNCTIONS*********************/
 // get products
 
-function get_products() {
-    $query = query("SELECT * FROM product");
+function get_products(){
+    $query = query(" SELECT * FROM product");
     confirm($query);
-    $rows = mysqli_num_rows($query);
 
-    if(isset($_GET['page'])){
-        $page = preg_replace('#[^0-9]#', '', $_GET['page']);
+    $rows = mysqli_num_rows($query); // Get total of mumber of rows from the database
 
-    } else{
+
+    if(isset($_GET['page'])){ //get page from URL if its there
+
+        $page = preg_replace('#[^0-9]#', '', $_GET['page']);//filter everything but numbers
+
+
+
+    } else{// If the page url variable is not present force it to be number 1
+
         $page = 1;
+
     }
-    $perPage = 6;
-    $lastPage = ceil($rows / $perPage);
 
-    if($page < 1){
 
-        $page = 1;
+    $perPage = 6; // Items per page here
 
-    }elseif($page > $lastPage){
+    $lastPage = ceil($rows / $perPage); // Get the value of the last page
 
-        $page = $lastPage;
+
+// Be sure URL variable $page(page number) is no lower than page 1 and no higher than $lastpage
+
+    if($page < 1){ // If it is less than 1
+
+        $page = 1; // force if to be 1
+
+    }elseif($page > $lastPage){ // if it is greater than $lastpage
+
+        $page = $lastPage; // force it to be $lastpage's value
+
     }
-    $middleNumbers = '';
+
+
+
+    $middleNumbers = ''; // Initialize this variable
+
+// This creates the numbers to click in between the next and back buttons
+
 
     $sub1 = $page - 1;
     $sub2 = $page - 2;
     $add1 = $page + 1;
     $add2 = $page + 2;
 
+
+
     if($page == 1){
 
-          $middleNumbers .= '<li class="page-item active"><a>' .$page. '</a></li>';
+        $middleNumbers .= '<li class="page-item active"><a>' .$page. '</a></li>';
 
-          $middleNumbers .= '<li class="page-item"><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?page='.$add1.'">' .$add1. '</a></li>';
+        $middleNumbers .= '<li class="page-item"><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?page='.$add1.'">' .$add1. '</a></li>';
 
     } elseif ($page == $lastPage) {
 
-          $middleNumbers .= '<li class="page-item"><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?page='.$sub1.'">' .$sub1. '</a></li>';
-          $middleNumbers .= '<li class="page-item active"><a>' .$page. '</a></li>';
+        $middleNumbers .= '<li class="page-item"><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?page='.$sub1.'">' .$sub1. '</a></li>';
+        $middleNumbers .= '<li class="page-item active"><a>' .$page. '</a></li>';
 
     }elseif ($page > 2 && $page < ($lastPage -1)) {
 
-          $middleNumbers .= '<li class="page-item"><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?page='.$sub2.'">' .$sub2. '</a></li>';
+        $middleNumbers .= '<li class="page-item"><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?page='.$sub2.'">' .$sub2. '</a></li>';
 
-          $middleNumbers .= '<li class="page-item"><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?page='.$sub1.'">' .$sub1. '</a></li>';
+        $middleNumbers .= '<li class="page-item"><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?page='.$sub1.'">' .$sub1. '</a></li>';
 
-          $middleNumbers .= '<li class="page-item active"><a>' .$page. '</a></li>';
+        $middleNumbers .= '<li class="page-item active"><a>' .$page. '</a></li>';
 
-             $middleNumbers .= '<li class="page-item"><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?page='.$add1.'">' .$add1. '</a></li>';
+        $middleNumbers .= '<li class="page-item"><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?page='.$add1.'">' .$add1. '</a></li>';
 
-          $middleNumbers .= '<li class="page-item"><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?page='.$add2.'">' .$add2. '</a></li>';
+        $middleNumbers .= '<li class="page-item"><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?page='.$add2.'">' .$add2. '</a></li>';
 
 
 
 
     } elseif($page > 1 && $page < $lastPage){
 
-         $middleNumbers .= '<li class="page-item"><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?page= '.$sub1.'">' .$sub1. '</a></li>';
+        $middleNumbers .= '<li class="page-item"><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?page= '.$sub1.'">' .$sub1. '</a></li>';
 
-         $middleNumbers .= '<li class="page-item active"><a>' .$page. '</a></li>';
+        $middleNumbers .= '<li class="page-item active"><a>' .$page. '</a></li>';
 
-         $middleNumbers .= '<li class="page-item"><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?page='.$add1.'">' .$add1. '</a></li>';
+        $middleNumbers .= '<li class="page-item"><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?page='.$add1.'">' .$add1. '</a></li>';
+
+
+
+
+
     }
+
+
+// This line sets the "LIMIT" range... the 2 values we place to choose a range of rows from database in our query
+
 
     $limit = 'LIMIT ' . ($page-1) * $perPage . ',' . $perPage;
 
+
+
+
+// $query2 is what we will use to to display products with out $limit variable
+
     $query2 = query(" SELECT * FROM product $limit");
     confirm($query2);
-    $outputPagination = "";
 
+
+    $outputPagination = ""; // Initialize the pagination output variable
+
+
+// if($lastPage != 1){
+
+//    echo "Page $page of $lastPage";
+
+
+// }
+
+
+    // If we are not on page one we place the back link
 
     if($page != 1){
 
@@ -122,9 +170,12 @@ function get_products() {
         $outputPagination .='<li class="page-item"><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?page='.$prev.'">Back</a></li>';
     }
 
-
+    // Lets append all our links to this variable that we can use this output pagination
 
     $outputPagination .= $middleNumbers;
+
+
+// If we are not on the very last page we the place the next link
 
     if($page != $lastPage){
 
@@ -134,96 +185,53 @@ function get_products() {
         $outputPagination .='<li class="page-item"><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?page='.$next.'">Next</a></li>';
 
     }
-    while($row = fetch_array($query2)) {
 
-    $product_image = display_image($row['product_image']);
 
-    $product = <<<DELIMETER
+// Doen with pagination
 
-    <div class="col-sm-4 col-lg-4 col-md-4">
-        <div class="thumbnail">
-            <a href="item.php?id={$row['ProductID']}"><img style="height:90px" src="../resources/{$product_image}" alt=""></a>
-            <div class="caption">
-                <h4 class="pull-right">&#36;{$row['Price']}</h4>
-                <h4><a href="item.php?id={$row['ProductID']}">{$row['Name']}</a>
-                </h4>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-                 <a class="btn btn-primary" target="_blank" href="../ShoppingCart/cart.php?add={$row['ProductID']}">Add to cart</a>
+
+
+// Remember we use query 2 below :)
+
+    while($row = fetch_array($query)){
+        $product_image = display_image($row['product_image']); ?>
+
+        <div class="col-sm-4 col-lg-4 col-md-4">
+            <div class="thumbnail">
+                <a  href="item.php?id=<?php echo $row['ProductId'] ?>"> <img src="../resources/<?php echo $product_image ?>" alt=""> </a>
+                <div class="caption">
+                    <?php
+                    if( $row['discount_percent'] >= 1 ){
+                        $original_price= (int)$row['Price'];
+                        $discount_percent= (int)$row['discount_percent'];
+                        $dis_end_date= $row['dis_end_date'];
+                        $current_date= date("Y-m-d");
+                        $discount_value = ($original_price / 100) * $discount_percent;
+                        $discount_price = $original_price - $discount_value;
+
+                        if($dis_end_date > $current_date){
+                            echo '<h4 class="pull-right line_throw_price">'. $row['Price'] .'</h4>
+            <h4 class="pull-right discount_price">&euro;'. $discount_price .'</h4>
+            <p class="percent_off">'. $discount_percent .'%  off</p>
+            ';
+                        }else{
+                            echo '<h4 class="pull-right">&euro;'. $row['Price'] .'00</h4>';
+                        }
+                    }else{
+                        echo '<h4 class="pull-right">&euro;'. $row['Price'] .'</h4>';
+                    }
+                    ?>
+                    <h4><a href="item.php?id=<?php echo $row['ProductId'] ?>"> <?php echo $row['Name'] ?></a>
+                    </h4> <br>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                    <a href="item.php?id=<?php echo $row['product_id'] ?>" class="btn btn-default">More Info</a>
+                    <a class="btn btn-primary" target="_blank" href="../ShoppingCart/cart.php?add={$row['ProductID']}">Add to cart</a>
+                </div>
             </div>
         </div>
-    </div>
-
-    DELIMETER;
-
-    echo $product;
+        <?php
     }
-
-
-
     echo "<div class='text-center'><ul class='pagination'>{$outputPagination}</ul></div>";
-
-
-    }
-
-function get_categories(){
-    $query = query("SELECT * FROM category");
-    confirm($query);
-    while($row = fetch_array($query)){
-
-$categories_links =<<<DELIMETER
-<a href='category.php?id={$row['CategoryID']}' class='list-group-item'>{$row['CategoryName']}</a>
-DELIMETER;
-
-echo $categories_links;
-    }
-}
-
-function get_products_in_cat_page(){
-    $query = query("SELECT * FROM product WHERE Category_ID =" . escape_string($_GET['id']). " ");
-    confirm($query);
-    while($row = fetch_array($query)){
-        $product_image = display_image($row['product_image']);
-        $product =<<<DELIMETER
-        <div class="col-md-3 col-sm-6 hero-feature">
-                <div class="thumbnail">
-                    <img src="../resources/{$product_image}" alt="">
-                    <div class="caption">
-                        <h3>{$row['Name']}</h3>
-                         <h3>&euro;{$row['Price']}</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                        <p>
-                            <a href="#" class="btn btn-primary">Buy Now!</a> <a href="item.php?id={$row['ProductID']}" class="btn btn-default">More Info</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-DELIMETER;
-        echo $product;
-    }
-}
-
-
-function get_products_in_shop_page(){
-    $query = query("SELECT * FROM product");
-    confirm($query);
-    while($row = fetch_array($query)){
-        $product_image = display_image($row['product_image']);
-        $product =<<<DELIMETER
-        <div class="col-md-3 col-sm-6 hero-feature">
-                <div class="thumbnail">
-                    <img src="../resources/{$product_image}" alt="">
-                    <div class="caption">
-                        <h3>{$row['Name']}</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                        <p>
-                            <a href="" class="btn btn-primary">Buy Now!</a> <a href="item.php?id={$row['ProductID']}" class="btn btn-default">More Info</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-DELIMETER;
-        echo $product;
-    }
 }
 
 
