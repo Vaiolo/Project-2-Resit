@@ -152,20 +152,15 @@ DELIMETER;
                     $quantity++;
 
 
-
                 }
                 $_SESSION['item_total'] = $total += $sub;
                 $_SESSION['item_quantity'] = $total_quantity  += $value;
-
-
 
             }
 
         }
 
     }
-
-
 
 }
 
@@ -183,22 +178,9 @@ function show_paypal() // delimeter for not changing the quotes
 
 DELIMETER;
 
-
-
-
-
-
-
-
         return $paypal_button;
 
-
-
-
     }
-
-
-
 
 }
 
